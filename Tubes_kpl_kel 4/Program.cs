@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Tubes_kpl_kel_4.Validators;
+using Tubes_kpl_kel_4.RiwayatReservasi;
 
 class RegistrasiValidasi
 {
@@ -61,5 +62,22 @@ class Program
         Console.Write("Alasan: ");
         string alasan = Console.ReadLine();
         PembatalanValidasi.ValidasiPembatalan(kode, alasan);
+
+        var riwayatService = new RiwayatService();
+
+        Console.WriteLine("Masukkan nama untuk melihat riwayat reservasi:");
+        Console.Write("Nama: ");
+        nama = Console.ReadLine();
+
+        var hasilRiwayat = riwayatService.GetRiwayatByNama(nama);
+
+        if (hasilRiwayat.Count == 0)
+        {
+            Console.WriteLine("Tidak ada riwayat untuk nama tersebut.");
+        }
+        else
+        {
+            riwayatService.TampilkanRiwayat(hasilRiwayat);
+        }
     }
 }
