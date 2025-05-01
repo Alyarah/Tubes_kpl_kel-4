@@ -15,11 +15,6 @@ namespace Tubes_kpl_kel_4
         public List<string> Peserta { get; set; }
     }
 
-    public class Acara
-    {
-        public string NamaAcara { get; set; }
-        public string Penyelenggara { get; set; }
-    }
 
     public class ReservasiRuangan<TJenis> where TJenis : class
     {

@@ -1,4 +1,4 @@
-﻿namespace Tubes_kpl_kel_4.Models
+﻿namespace Tubes_kpl_kel_4
 {
     public class Mahasiswa
     {
@@ -18,7 +18,7 @@
         public string Jabatan { get; set; }
     }
 
-    public class FormRegistration<TUser> where TUser : class, new()
+    public class RegistrasiForm<TUser> where TUser : class, new()
     {
         public TUser UserData { get; set; }
 
