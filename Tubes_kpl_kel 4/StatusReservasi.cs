@@ -58,7 +58,7 @@ namespace Tubes_kpl_kel_4
         }
         public void PrintStatusReservasi()
         {
-            Console.WriteLine("=== Status Reservasi ===:");
+            Console.WriteLine("=== Status Reservasi ===");
             if (DaftarReservasi.Count == 0)
             {
                 Console.WriteLine("Tidak ada reservasi yang tersedia.");
@@ -77,7 +77,7 @@ namespace Tubes_kpl_kel_4
         }
         public void TampilkanDaftarKelas(string hariFilter = "", int kapasitasFilter = 0)
         {
-            Console.WriteLine("=== Daftar Kelas ===:");
+            Console.WriteLine("=== Daftar Kelas ===");
             var filteredKelas = DaftarReservasi;
             if (!string.IsNullOrEmpty(hariFilter))
             {
