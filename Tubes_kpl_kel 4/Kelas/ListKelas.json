@@ -52,8 +52,8 @@
   "Reservasi": [
     {
       "Jadwal Reservasi": {
-        "NamaPemesan": "Alya",
-        "Tanggal ": "2025-04-01",
+        "NamaUser": "Alya",
+        "Tanggal": "2025-04-01",
         "Mulai": "08:00",
         "Selesai": "10:30"
       },
@@ -63,8 +63,8 @@
     },
     {
       "Jadwal Reservasi": {
-        "NamaPemesan": "Rahma",
-        "Tanggal ": "2025-04-02",
+        "NamaUser": "Rahma",
+        "Tanggal": "2025-04-02",
         "Mulai": "08:00",
         "Selesai": "10:30"
       },
@@ -74,8 +74,8 @@
     },
     {
       "Jadwal Reservasi": {
-        "NamaPemesan": "Sheila",
-        "Tanggal ": "2025-04-01",
+        "NamaUser": "Sheila",
+        "Tanggal": "2025-04-01",
         "Mulai": "08:00",
         "Selesai": "10:30"
       },
@@ -85,8 +85,8 @@
     },
     {
       "Jadwal Reservasi": {
-        "NamaPemesan": "Nabilla",
-        "Tanggal ": "2025-04-03",
+        "NamaUser": "Nabilla",
+        "Tanggal": "2025-04-03",
         "Mulai": "13:30",
         "Selesai": "16:30"
       },
@@ -96,8 +96,8 @@
     },
     {
       "Jadwal Reservasi": {
-        "NamaPemesan": "Chantika",
-        "Tanggal ": "2025-04-11",
+        "NamaUser": "Chantika",
+        "Tanggal": "2025-04-11",
         "Mulai": "09:00",
         "Selesai": "12:00"
       },

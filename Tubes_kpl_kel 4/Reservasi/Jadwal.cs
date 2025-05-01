@@ -11,7 +11,7 @@
 
         public Jadwal() { }
 
-        public Jadwal(string Tempat, string Ruangan, int Kapasitaas, string Hari, string Mulai, string Selesai)
+        public Jadwal(string Tempat, string Ruangan, int Kapasitas, string Hari, string Mulai, string Selesai)
         {
             Tempat = Tempat;
             Ruangan = Ruangan;

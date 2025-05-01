@@ -5,7 +5,7 @@ namespace Tubes_kpl_kel_4.Reservasi
     public class JadwalReservasi
     {
         public string NamaUser { get; set; }
-        [JsonPropertyName("Tanggal ")]
+        [JsonPropertyName("Tanggal")]
         public string Tanggal { get; set; }
         public string Mulai { get; set; }
         public string Selesai { get; set; }

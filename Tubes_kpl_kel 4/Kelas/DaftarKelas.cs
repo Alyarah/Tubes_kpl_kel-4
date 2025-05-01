@@ -8,7 +8,7 @@ namespace Tubes_kpl_kel_4
     public class DaftarKelas
     {
         public List<Jadwal> ListKelas { get; set; } = new List<Jadwal>();
-        public const string filePath = "D:\\Praktikum Konstruksi PL\\Tubes_kpl_kel 4\\Tubes_kpl_kel 4\\Kelas\\ListKelas.json";
+        public string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
 
         public DaftarKelas(string configPath)
         {
@@ -40,7 +40,7 @@ namespace Tubes_kpl_kel_4
             else
             {
                 Console.WriteLine("Data 'Jadwal' tidak ditemukan dalam file JSON.");
-                ListKelas = new List<Jadwal>();  // Jika tidak ada data jadwal
+                ListKelas = new List<Jadwal>(); 
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using Tubes_kpl_kel_4.Auth;
 using Tubes_kpl_kel_4.Models;
+using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4
 {
@@ -54,6 +55,13 @@ namespace Tubes_kpl_kel_4
 
                         if (login.Status == StatusLogin.Berhasil)
                         {
+                            var currentUser = new User { Nama = nama, Email = email };
+                            var daftarKelas = new DaftarKelas("data.json");
+                            var listJadwal = daftarKelas.ListKelas;
+                            var listReservasi = new List<DataReservasi>();
+
+                            var reservasiRuangan = new ReservasiRuangan(currentUser, listJadwal, listReservasi, daftarKelas);
+
                             bool logout = false;
                             while (!logout)
                             {
@@ -71,13 +79,32 @@ namespace Tubes_kpl_kel_4
                                 switch (menuLogin)
                                 {
                                     case "1":
-                                        var kelas = new DaftarKelas("data.json");
-                                        kelas.PrintDaftarKelas();
+                                        daftarKelas.PrintDaftarKelas();
                                         break;
 
                                     case "2":
-                                        Console.WriteLine("[Reservasi Kelas] Fitur belum diimplementasikan.");
-                                        // Panggil fungsi atau kelas untuk melakukan reservasi
+                                        Console.WriteLine("Masukkan tempat: ");
+                                        string tempat = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan ruangan: ");
+                                        string ruangan = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan kapasitas: ");
+                                        int kapasitas = int.Parse(Console.ReadLine());
+
+                                        Console.WriteLine("Masukkan tanggal (yyyy-MM-dd): ");
+                                        string tanggal = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan jam mulai (HH:mm): ");
+                                        string jamMulai = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan jam selesai (HH:mm): ");
+                                        string jamSelesai = Console.ReadLine();
+
+                                        // Panggil fungsi LakukanReservasi untuk mencoba melakukan reservasi
+                                        string hasilReservasi = reservasiRuangan.LakukanReservasi (
+                                            tempat, ruangan, kapasitas, tanggal, jamMulai, jamSelesai);
+                                        Console.WriteLine(hasilReservasi);
                                         break;
 
                                     case "3":
