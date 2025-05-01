@@ -29,11 +29,11 @@ public class ReservasiRuangan
 
         foreach (var reservasi in _reservasiList)
         {
-            if (reservasi.Tempat == tempat && reservasi.Ruangan == ruangan && reservasi.Tanggal == tanggal)
+            if (reservasi.Tempat == tempat && reservasi.Ruangan == ruangan && reservasi.jReservasi.Tanggal == tanggal)
             {
-                if (jamMulai.CompareTo(reservasi.Selesai) < 0 && jamSelesai.CompareTo(reservasi.Mulai) > 0)
+                if (jamMulai.CompareTo(reservasi.jReservasi.Selesai) < 0 && jamSelesai.CompareTo(reservasi.jReservasi.Mulai) > 0)
                 {
-                    return $"Gagal: Sudah dipesan oleh {reservasi.NamaPemesan} dari {reservasi.Mulai} sampai {reservasi.Selesai}.";
+                    return $"Gagal: Sudah dipesan oleh {reservasi.jReservasi.NamaUser} dari {reservasi.jReservasi.Mulai} sampai {reservasi.jReservasi.Selesai}.";
                 }
             }
         }

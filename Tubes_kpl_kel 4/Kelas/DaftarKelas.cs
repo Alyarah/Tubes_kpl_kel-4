@@ -1,35 +1,16 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
+using Tubes_kpl_kel_4.Reservasi;
+
 
 namespace Tubes_kpl_kel_4
 {
-    public class JadwalConfig
+    public class DaftarKelas
     {
-        public string Tempat { get; set; }
-        public string Ruangan { get; set; }
-        public int Kapasitas { get; set; }
-        public string Hari { get; set; }
-        public string Mulai { get; set; }
-        public string Selesai { get; set; }
+        public List<Jadwal> ListKelas { get; set; } = new List<Jadwal>();
+        public const string filePath = "D:\\Praktikum Konstruksi PL\\Tubes_kpl_kel 4\\Tubes_kpl_kel 4\\Kelas\\ListKelas.json";
 
-        public JadwalConfig() { }
-
-        public JadwalConfig(string Tempat, string Ruangan, int Kapasitaas, string Hari, string Mulai, string Selesai)
-        {
-            Tempat = Tempat;
-            Ruangan = Ruangan;
-            Kapasitas = Kapasitas;
-            Hari = Hari;
-            Mulai = Mulai;
-            Selesai = Selesai;
-        }
-    }
-    public class lihatDaftarKelas
-    {
-        public List<JadwalConfig> DaftarKelas { get; set; } = new List<JadwalConfig>();
-        public const string filePath = "D:\\Praktikum Konstruksi PL\\Tubes_kpl_kel 4\\Tubes_kpl_kel 4\\Kelas.json";
-
-        public lihatDaftarKelas(string configPath)
+        public DaftarKelas(string configPath)
         {
             try
             {
@@ -38,24 +19,29 @@ namespace Tubes_kpl_kel_4
             catch (Exception)
             {
                 Console.WriteLine("Gagal membaca konfigurasi");
-                DaftarKelas = new List<JadwalConfig>();
+                ListKelas = new List<Jadwal>();
                 WriteNewConfigFile();
             }
         }
+        public class JadwalConfig
+        {
+            public List<Jadwal> Jadwal { get; set; }
+        }
+
 
         private void ReadJadwalConfig()
         {
             String configJsonData = File.ReadAllText(filePath);
-            var jsonObject = JsonSerializer.Deserialize<JsonObject>(configJsonData);
+            var config = JsonSerializer.Deserialize<JadwalConfig>(configJsonData);
 
-            if (jsonObject != null && jsonObject.ContainsKey("Jadwal"))
+            if (config?.Jadwal != null)
             {
-                DaftarKelas = JsonSerializer.Deserialize<List<JadwalConfig>>(jsonObject["Jadwal"].ToString());
+                ListKelas = config.Jadwal;
             }
             else
             {
                 Console.WriteLine("Data 'Jadwal' tidak ditemukan dalam file JSON.");
-                DaftarKelas = new List<JadwalConfig>();  // Jika tidak ada data jadwal
+                ListKelas = new List<Jadwal>();  // Jika tidak ada data jadwal
             }
         }
 
@@ -65,13 +51,13 @@ namespace Tubes_kpl_kel_4
             {
                 WriteIndented = true
             };
-            String jsonString = JsonSerializer.Serialize(DaftarKelas, options);
+            String jsonString = JsonSerializer.Serialize(ListKelas, options);
             File.WriteAllText(filePath, jsonString);
         }
         public void PrintDaftarKelas()
         {
             Console.WriteLine("=== Daftar Kelas ===");
-            foreach (var jadwal in DaftarKelas)
+            foreach (var jadwal in ListKelas)
             {
                 Console.WriteLine($"{jadwal.Hari} | {jadwal.Tempat} - {jadwal.Ruangan} | Kapasitas: {jadwal.Kapasitas} orang | {jadwal.Mulai} - {jadwal.Selesai}");
             }

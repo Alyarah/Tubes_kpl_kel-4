@@ -1,13 +1,22 @@
-﻿namespace Tubes_kpl_kel_4.Reservasi
+﻿using System.Text.Json.Serialization;
+
+namespace Tubes_kpl_kel_4.Reservasi
 {
-    public class DataReservasi
+    public class JadwalReservasi
     {
-        public string NamaPemesan { get; set; }
-        public string Tempat { get; set; }
-        public string Ruangan { get; set; }
-        public int Kapasitas { get; set; }
+        public string NamaUser { get; set; }
+        [JsonPropertyName("Tanggal ")]
         public string Tanggal { get; set; }
         public string Mulai { get; set; }
         public string Selesai { get; set; }
+    }
+    
+    public class DataReservasi
+    {
+        [JsonPropertyName("Jadwal Reservasi")]
+        public JadwalReservasi jReservasi { get; set; }
+        public string Tempat { get; set; }
+        public string Ruangan { get; set; }
+        public int Kapasitas { get; set; }
     }
 }
