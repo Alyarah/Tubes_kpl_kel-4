@@ -20,6 +20,17 @@ namespace Tubes_kpl_kel_4.Validators
             return !string.IsNullOrWhiteSpace(password) && password.Length >= 6;
         }
 
+        public static bool ValidasiPembatalan(string kodeKelas, string alasan)
+        {
+            bool validKode = Validasi.ValidasiKelas(kodeKelas);
+            bool validAlasan = Validasi.ValidasiAlasan(alasan);
+
+            Validasi.TampilkanHasil("Kode Kelas", validKode);
+            Validasi.TampilkanHasil("Alasan", validAlasan);
+
+            return validKode && validAlasan;
+        }
+
         public static bool ValidasiTanggal(string tanggal, out DateTime result)
         {
             return DateTime.TryParse(tanggal, out result);
