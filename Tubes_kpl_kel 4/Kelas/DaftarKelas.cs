@@ -28,7 +28,6 @@ namespace Tubes_kpl_kel_4
             public List<Jadwal> Jadwal { get; set; }
         }
 
-
         private void ReadJadwalConfig()
         {
             String configJsonData = File.ReadAllText(filePath);
