@@ -1,6 +1,6 @@
 ﻿using Tubes_kpl_kel_4.Validators;
 
-namespace Tubes_kpl_kel_4
+namespace Tubes_kpl_kel_4.Auth
 {
     public enum StatusLogin
     {
@@ -16,6 +16,7 @@ namespace Tubes_kpl_kel_4
         public string Email { get; set; }
         public string Password { get; set; }
 
+
         public Login()
         {
             Status = StatusLogin.BelumLogin;
@@ -23,22 +24,32 @@ namespace Tubes_kpl_kel_4
 
         public string LoginUser(string nama, string email, string password)
         {
+
             bool validNama = Validasi.ValidasiNama(nama);
             bool validEmail = Validasi.ValidasiEmail(email);
             bool validPass = Validasi.ValidasiPassword(password);
 
-            if (!validNama || !validEmail || !validPass)
+            var user = UserStorage.CariUser(nama, email, password);
+            if (user != null)
             {
-                Status = StatusLogin.Gagal;
-                return "Login gagal. Nama, Email, atau Password tidak valid.";
+                if (!validNama || !validEmail || !validPass)
+                {
+                    Status = StatusLogin.Gagal;
+                    return "Login gagal. Inputan tidak valid.";
+                }
+                else
+                {
+                    Nama = nama;
+                    Email = email;
+                    Password = password;
+                    Status = StatusLogin.Berhasil;
+                    return $"Login berhasil.\nNama: {nama}\nEmail: {email}";
+                }
             }
             else
             {
-                Nama = nama;
-                Email = email;
-                Password = password;
-                Status = StatusLogin.Berhasil;
-                return $"Login berhasil.\nNama: {nama}\nEmail: {email}";
+                Status = StatusLogin.Gagal;
+                return "Login gagal. Data tidak ditemukan atau salah.";
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿namespace Tubes_kpl_kel_4.Validators
+﻿using Tubes_kpl_kel_4.Auth;
+using Tubes_kpl_kel_4.Models;
+
+namespace Tubes_kpl_kel_4.Validators
 {
     public class Validasi
     {
