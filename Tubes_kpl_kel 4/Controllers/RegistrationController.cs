@@ -11,21 +11,21 @@ namespace Tubes_kpl_kel_4.Controllers
         [HttpPost("mahasiswa")]
         public IActionResult RegisterMahasiswa([FromBody] Mahasiswa mahasiswa)
         {
-            var form = new RegistrationForm<Mahasiswa> { UserData = mahasiswa };
+            var form = new FormRegistration<Mahasiswa> { UserData = mahasiswa };
             return Ok(form.Register());
         }
 
         [HttpPost("dosen")]
         public IActionResult RegisterDosen([FromBody] Dosen dosen)
         {
-            var form = new RegistrationForm<Dosen> { UserData = dosen };
+            var form = new FormRegistration<Dosen> { UserData = dosen };
             return Ok(form.Register());
         }
 
         [HttpPost("staf")]
         public IActionResult RegisterStaf([FromBody] Staf staf)
         {
-            var form = new RegistrationForm<Staf> { UserData = staf };
+            var form = new FormRegistration<Staf> { UserData = staf };
             return Ok(form.Register());
         }
     }

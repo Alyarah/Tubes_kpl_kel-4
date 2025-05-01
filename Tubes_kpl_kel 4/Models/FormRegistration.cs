@@ -19,7 +19,7 @@
         public string Jabatan { get; set; }
     }
 
-    public class RegistrationForm<TUser> where TUser : class, new()
+    public class FormRegistration<TUser> where TUser : class, new()
     {
         public TUser UserData { get; set; }
 
