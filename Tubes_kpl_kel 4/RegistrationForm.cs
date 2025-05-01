@@ -1,6 +1,5 @@
 ﻿namespace Tubes_kpl_kel_4
 {
-    // Definisi kelas Mahasiswa, Dosen, Staf tetap sama...
     public class Mahasiswa
     {
         public string NIM { get; set; }
