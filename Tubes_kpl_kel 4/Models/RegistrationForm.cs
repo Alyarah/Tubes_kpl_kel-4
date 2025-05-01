@@ -1,4 +1,4 @@
-﻿namespace Tubes_kpl_kel_4
+﻿namespace Tubes_kpl_kel_4.Models
 {
     // Definisi kelas Mahasiswa, Dosen, Staf tetap sama...
     public class Mahasiswa
