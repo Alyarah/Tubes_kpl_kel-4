@@ -63,21 +63,20 @@ class Program
         string alasan = Console.ReadLine();
         PembatalanValidasi.ValidasiPembatalan(kode, alasan);
 
-        var riwayatService = new RiwayatService();
+        var daftarReservasi = new List<DataReservasi>
+            {
+                new DataReservasi { NamaPemesan = "Bella", Tempat = "Gedung A", Ruangan = "R.01", Tanggal = new DateTime(2024, 11, 15), Status = "Berhasil" },
+                new DataReservasi { NamaPemesan = "Dian", Tempat = "Gedung A", Ruangan = "R.02", Tanggal = new DateTime(2024, 11, 16), Status = "Dibatalkan" },
+                new DataReservasi { NamaPemesan = "Budi", Tempat = "Gedung A", Ruangan = "R.03", Tanggal = new DateTime(2024, 11, 17), Status = "Berhasil" },
+                new DataReservasi { NamaPemesan = "Eka", Tempat = "Gedung B", Ruangan = "R.01", Tanggal = new DateTime(2024, 11, 18), Status = "TidakDikenal" }
+            };
 
-        Console.WriteLine("Masukkan nama untuk melihat riwayat reservasi:");
-        Console.Write("Nama: ");
-        nama = Console.ReadLine();
+        var handler = new StatusHandler();
 
-        var hasilRiwayat = riwayatService.GetRiwayatByNama(nama);
-
-        if (hasilRiwayat.Count == 0)
+        Console.WriteLine("== Riwayat Reservasi (Hardcoded) ==");
+        foreach (var reservasi in daftarReservasi)
         {
-            Console.WriteLine("Tidak ada riwayat untuk nama tersebut.");
-        }
-        else
-        {
-            riwayatService.TampilkanRiwayat(hasilRiwayat);
+            handler.Tangani(reservasi);
         }
     }
 }

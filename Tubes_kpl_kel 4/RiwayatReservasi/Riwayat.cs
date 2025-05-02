@@ -1,45 +1,50 @@
-﻿namespace Tubes_kpl_kel_4.RiwayatReservasi
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tubes_kpl_kel_4.RiwayatReservasi
 {
     class DataReservasi
     {
         public string NamaPemesan { get; set; }
-        public string NamaKelas { get; set; }
+        public string Tempat { get; set; }
+        public string Ruangan { get; set; }
         public DateTime Tanggal { get; set; }
-        public string Status { get; set; }  // Contoh: "Dibatalkan", "Berhasil", "Ditolak"
+        public string Status { get; set; }
     }
 
-    class RiwayatService
+    class StatusHandler
     {
-            private readonly List<DataReservasi> _dataRiwayat;
+        private readonly Dictionary<string, Action<DataReservasi>> _statusActions;
 
-            public RiwayatService()
+        public StatusHandler()
+        {
+            _statusActions = new Dictionary<string, Action<DataReservasi>>(StringComparer.OrdinalIgnoreCase)
             {
-                // Ini adalah "tabel" data statis (bisa diganti dari database nanti)
-                _dataRiwayat = new List<DataReservasi>
-            {
-                new DataReservasi { NamaPemesan = "Bella", NamaKelas = "Ruang A101", Tanggal = new DateTime(2024, 11, 15), Status = "Berhasil" },
-                new DataReservasi { NamaPemesan = "Dian", NamaKelas = "Ruang B202", Tanggal = new DateTime(2024, 11, 16), Status = "Dibatalkan" },
-                new DataReservasi { NamaPemesan = "Budi", NamaKelas = "Lab Komputer", Tanggal = new DateTime(2024, 11, 17), Status = "Berhasil" },
+                { "Berhasil", TampilkanBerhasil },
+                { "Dibatalkan", TampilkanDibatalkan }
             };
-            }
+        }
 
-            public List<DataReservasi> GetSemuaRiwayat()
+        public void Tangani(DataReservasi reservasi)
+        {
+            if (_statusActions.TryGetValue(reservasi.Status, out var aksi))
             {
-                return _dataRiwayat;
+                aksi(reservasi);
             }
+            else
+            {
+                Console.WriteLine($"[Status Tidak Dikenali] Nama: {reservasi.NamaPemesan} | Status: {reservasi.Status}");
+            }
+        }
 
-            public List<DataReservasi> GetRiwayatByNama(string nama)
-            {
-                return _dataRiwayat.FindAll(r => r.NamaPemesan.Equals(nama, StringComparison.OrdinalIgnoreCase));
-            }
+        private void TampilkanBerhasil(DataReservasi r)
+        {
+            Console.WriteLine($"[BERHASIL] {r.NamaPemesan} memesan {r.Ruangan} di {r.Tempat} pada {r.Tanggal:d}");
+        }
 
-            public void TampilkanRiwayat(List<DataReservasi> riwayatList)
-            {
-                Console.WriteLine("\n== Riwayat Reservasi ==");
-                foreach (var item in riwayatList)
-                {
-                    Console.WriteLine($"Nama: {item.NamaPemesan} | Kelas: {item.NamaKelas} | Tanggal: {item.Tanggal.ToShortDateString()} | Status: {item.Status}");
-            }
+        private void TampilkanDibatalkan(DataReservasi r)
+        {
+            Console.WriteLine($"[DIBATALKAN] Reservasi oleh {r.NamaPemesan} untuk {r.Ruangan} dibatalkan.");
         }
     }
 }
