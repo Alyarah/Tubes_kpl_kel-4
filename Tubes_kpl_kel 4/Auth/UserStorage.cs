@@ -15,5 +15,10 @@ namespace Tubes_kpl_kel_4.Auth
         {
             return daftarUser.Any(u => u.Nama == nama && u.Email == email);
         }
+
+        public static bool CariUser(string nama, string email, string password)
+        {
+            return daftarUser.Any(u => u.Nama == nama && u.Email == email && u.Password == password);
+        }
     }
 }
