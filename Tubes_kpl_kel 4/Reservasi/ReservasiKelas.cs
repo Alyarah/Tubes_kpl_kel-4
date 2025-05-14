@@ -44,24 +44,25 @@ public class ReservasiRuangan
             }
         }
 
+        JadwalReservasi jadwalReservasiBaru = new JadwalReservasi
+        {
+            NamaUser = _user.Nama,
+            Tanggal = tanggal,
+            Mulai = jamMulai,
+            Selesai = jamSelesai
+        };
+
+        DataReservasi dataBaru = new DataReservasi
+        {
+            Tempat = tempat,
+            Ruangan = ruangan,
+            Kapasitas = kapasitas,
+            jReservasi = jadwalReservasiBaru
+        };
+
+        _reservasiList.Add(dataBaru);
+
         return $"Sukses: Reservasi oleh {_user.Nama} untuk {tempat} {ruangan} pada {tanggal} {jamMulai}-{jamSelesai} berhasil.";
     }
 
-    public void CariKelasBerdasarkanTanggal(string tanggal)
-    {
-        var kelasTersedia = _daftarKelas.ListKelas.Where(jadwal => jadwal.Hari.Equals(tanggal)).ToList();
-
-        if (kelasTersedia.Any())
-        {
-            Console.WriteLine("=== Kelas yang Tersedia pada Tanggal " + tanggal + " ===");
-            foreach (var jadwal in kelasTersedia)
-            {
-                Console.WriteLine($"{jadwal.Hari} | {jadwal.Tempat} - {jadwal.Ruangan} | Kapasitas: {jadwal.Kapasitas} orang | {jadwal.Mulai} - {jadwal.Selesai}");
-            }
-        }
-        else
-        {
-            Console.WriteLine($"Tidak ada kelas yang tersedia pada tanggal {tanggal}.");
-        }
-    }
 }
