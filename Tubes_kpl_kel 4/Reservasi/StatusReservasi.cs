@@ -39,6 +39,13 @@ namespace Tubes_kpl_kel_4.Reservasi
             String jsonString = JsonSerializer.Serialize(DaftarReservasi, options);
             File.WriteAllText(filePath, jsonString);
         }
+
+        public void TambahReservasi(DataReservasi reservasi)
+        {
+            DaftarReservasi.Add(reservasi);
+            WriteNewConfigFile();
+        }
+
         public void PrintStatusReservasi()
         {
             Console.WriteLine("=== Status Reservasi ===");
