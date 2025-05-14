@@ -1,4 +1,4 @@
-﻿namespace Tubes_kpl_kel_4.Validators
+﻿namespace Validator
 {
     public class Validasi
     {
@@ -11,7 +11,7 @@
         {
             return email.Contains("@") && (email.EndsWith(".com") || email.EndsWith(".ac.id"));
         }
-        
+
         public static bool ValidasiTanggal(string tanggal, out DateTime result)
         {
             return DateTime.TryParse(tanggal, out result);

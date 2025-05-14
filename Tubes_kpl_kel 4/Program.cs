@@ -1,16 +1,15 @@
 using System.ComponentModel.DataAnnotations;
-using Tubes_kpl_kel_4.Validators;
 using Tubes_kpl_kel_4.RiwayatReservasi;
 
 class RegistrasiValidasi
 {
     public static bool ValidasiNamaEmail(string nama, string email)
     {
-        bool validNama = Validasi.ValidasiNama(nama);
-        bool validEmail = Validasi.ValidasiEmail(email);
+        bool validNama = Validator.Validasi.ValidasiNama(nama);
+        bool validEmail = Validator.Validasi.ValidasiEmail(email);
 
-        Validasi.TampilkanHasil("Nama", validNama);
-        Validasi.TampilkanHasil("Email", validEmail);
+        Validator.Validasi.TampilkanHasil("Nama", validNama);
+        Validator.Validasi.TampilkanHasil("Email", validEmail);
 
         return validNama && validEmail;
     }
@@ -28,11 +27,11 @@ class PembatalanValidasi
 {
     public static bool ValidasiPembatalan(string kodeKelas, string alasan)
     {
-        bool validKode = Validasi.ValidasiKelas(kodeKelas);
-        bool validAlasan = Validasi.ValidasiAlasan(alasan);
+        bool validKode = Validator.Validasi.ValidasiKelas(kodeKelas);
+        bool validAlasan = Validator.Validasi.ValidasiAlasan(alasan);
 
-        Validasi.TampilkanHasil("Kode Kelas", validKode);
-        Validasi.TampilkanHasil("Alasan", validAlasan);
+        Validator.Validasi.TampilkanHasil("Kode Kelas", validKode);
+        Validator.Validasi.TampilkanHasil("Alasan", validAlasan);
 
         return validKode && validAlasan;
     }
@@ -54,7 +53,7 @@ class Program
         Console.Write("Isi feedback: ");
         string isi = Console.ReadLine();
         bool validFeedback = FeedbackValidasi.ValidasiIsiFeedback(isi);
-        Validasi.TampilkanHasil("Feedback", validFeedback);
+        Validator.Validasi.TampilkanHasil("Feedback", validFeedback);
 
         Console.WriteLine("\n== Form Pembatalan ==");
         Console.Write("Kode Kelas: ");
