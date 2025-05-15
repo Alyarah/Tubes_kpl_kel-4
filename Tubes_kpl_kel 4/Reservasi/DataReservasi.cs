@@ -10,7 +10,7 @@ namespace Tubes_kpl_kel_4.Reservasi
         public string Mulai { get; set; }
         public string Selesai { get; set; }
     }
-    
+
     public class DataReservasi
     {
         [JsonPropertyName("Jadwal Reservasi")]

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.Json;
-using Tubes_kpl_kel_4;
+﻿using Tubes_kpl_kel_4;
 using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Reservasi;
-using Tubes_kpl_kel_4.RiwayatReservasi;
 
 public class ReservasiRuangan
 {
@@ -14,23 +8,19 @@ public class ReservasiRuangan
     private List<Jadwal> _jadwalList;
     private List<DataReservasi> _reservasiList;
     private DaftarKelas _daftarKelas;
-    private StatusReservasi _statusReservasi;
-    private StatusReservasiHandler _statusHandler;
 
-    public ReservasiRuangan(User user, List<Jadwal> jadwalList, List<DataReservasi> reservasiList, DaftarKelas daftarKelas, StatusReservasiHandler statusHandler, StatusReservasi statusReservasi)
+    public ReservasiRuangan(User user, List<Jadwal> jadwalList, List<DataReservasi> reservasiList, DaftarKelas daftarKelas)
     {
         _user = user;
         _jadwalList = jadwalList;
         _reservasiList = reservasiList;
         _daftarKelas = daftarKelas;
-        _statusHandler = statusHandler;
-        _statusReservasi = statusReservasi;
     }
 
     public string LakukanReservasi(string tempat, string ruangan, int kapasitas, string tanggal, string jamMulai, string jamSelesai)
     {
         DateTime tanggalReservasi = DateTime.Parse(tanggal);
-        string hariDariTanggal = tanggalReservasi.ToString("dddd", new CultureInfo("id-ID"));
+        string hariDariTanggal = tanggalReservasi.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
 
         foreach (var jadwal in _jadwalList)
         {
@@ -54,7 +44,7 @@ public class ReservasiRuangan
             }
         }
 
-        var jadwalReservasiBaru = new JadwalReservasi
+        JadwalReservasi jadwalReservasiBaru = new JadwalReservasi
         {
             NamaUser = _user.Nama,
             Tanggal = tanggal,
@@ -62,7 +52,7 @@ public class ReservasiRuangan
             Selesai = jamSelesai
         };
 
-        var dataBaru = new DataReservasi
+        DataReservasi dataBaru = new DataReservasi
         {
             Tempat = tempat,
             Ruangan = ruangan,
@@ -71,25 +61,8 @@ public class ReservasiRuangan
         };
 
         _reservasiList.Add(dataBaru);
-        _statusHandler.TambahReservasi(dataBaru);
 
         return $"Sukses: Reservasi oleh {_user.Nama} untuk {tempat} {ruangan} pada {tanggal} {jamMulai}-{jamSelesai} berhasil.";
     }
 
-    private void SimpanRiwayat()
-    {
-        try
-        {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-            var jsonString = JsonSerializer.Serialize(new { Reservasi = _reservasiList }, options); // ✅ serialize dari list internal
-            File.WriteAllText(StatusReservasiHandler.filePath, jsonString); // ✅ ganti class enum ke handler
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Gagal menyimpan riwayat: " + ex.Message);
-        }
-    }
 }

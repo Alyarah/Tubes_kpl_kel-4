@@ -4,7 +4,7 @@ using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4.RiwayatReservasi
 {
-    public class StatusHandler
+    class StatusHandler
     {
         private readonly Dictionary<string, Action<DataReservasi>> _statusActions;
 
@@ -25,18 +25,6 @@ namespace Tubes_kpl_kel_4.RiwayatReservasi
         private void TampilkanDibatalkan(DataReservasi r)
         {
             Console.WriteLine($"[DIBATALKAN] Reservasi oleh {r.jReservasi.NamaUser} untuk {r.Ruangan} dibatalkan.");
-        }
-
-        public void TampilkanStatus(DataReservasi reservasi, string status)
-        {
-            if (_statusActions.TryGetValue(status, out var aksi))
-            {
-                aksi(reservasi);
-            }
-            else
-            {
-                Console.WriteLine("[STATUS TIDAK DIKENAL]");
-            }
         }
     }
 }

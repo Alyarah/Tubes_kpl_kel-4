@@ -4,11 +4,11 @@ using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4.Reservasi
 {
-    public class StatusReservasiHandler
+    public class StatusReservasi
     {
         public List<DataReservasi> DaftarReservasi { get; set; } = new List<DataReservasi>();
-        public static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas.json");
-        public StatusReservasiHandler()
+        public const string filePath = "D:\\Praktikum Konstruksi PL\\Tubes_kpl_kel 4\\Tubes_kpl_kel 4\\Kelas.json";
+        public StatusReservasi()
         {
             try
             {
@@ -39,13 +39,6 @@ namespace Tubes_kpl_kel_4.Reservasi
             String jsonString = JsonSerializer.Serialize(DaftarReservasi, options);
             File.WriteAllText(filePath, jsonString);
         }
-
-        public void TambahReservasi(DataReservasi reservasi)
-        {
-            DaftarReservasi.Add(reservasi);
-            WriteNewConfigFile();
-        }
-
         public void PrintStatusReservasi()
         {
             Console.WriteLine("=== Status Reservasi ===");

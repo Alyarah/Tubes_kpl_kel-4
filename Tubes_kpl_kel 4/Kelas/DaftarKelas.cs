@@ -40,7 +40,7 @@ namespace Tubes_kpl_kel_4
             else
             {
                 Console.WriteLine("Data 'Jadwal' tidak ditemukan dalam file JSON.");
-                ListKelas = new List<Jadwal>(); 
+                ListKelas = new List<Jadwal>();
             }
         }
 
