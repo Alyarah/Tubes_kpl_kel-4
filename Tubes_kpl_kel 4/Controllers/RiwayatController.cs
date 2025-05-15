@@ -8,7 +8,6 @@ namespace Tubes_kpl_kel_4.Controllers
     [Route("api/[controller]")]
     public class RiwayatController : ControllerBase
     {
-        // Sementara pakai data dummy (bisa diganti dengan database atau file JSON nantinya)
         private static readonly List<RiwayatReservasiItem> _riwayat = new List<RiwayatReservasiItem>
         {
             new RiwayatReservasiItem

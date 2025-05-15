@@ -10,17 +10,14 @@ namespace Tubes_kpl_kel_4.Controllers
     [Route("api/[controller]")]
     public class ReservasiController : ControllerBase
     {
-        // Simulasi data jadwal tetap diambil dari DaftarKelas
         private static DaftarKelas _daftarKelas = new DaftarKelas(
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json")
         );
 
         private static List<Jadwal> _jadwalList = _daftarKelas.ListKelas;
 
-        // Simulasi database reservasi, awalnya kosong
         private static List<DataReservasi> _reservasiList = new();
 
-        // Simulasi user login (ganti kalau ada autentikasi)
         private static User _currentUser = new User { Nama = "Sheila" };
 
         public class ReservasiRequest
@@ -36,10 +33,8 @@ namespace Tubes_kpl_kel_4.Controllers
         [HttpPost]
         public IActionResult PostReservasi([FromBody] ReservasiRequest request)
         {
-            // Buat instance service reservasi
             var reservasiService = new ReservasiRuangan(_currentUser, _jadwalList, _reservasiList, _daftarKelas);
 
-            // Panggil method untuk melakukan reservasi
             string hasil = reservasiService.LakukanReservasi(
                 request.Tempat,
                 request.Ruangan,

@@ -30,18 +30,18 @@ namespace Tubes_kpl_kel_4.Controllers
             var rootNode = JsonDocument.Parse(json).RootElement;
             var reservasiList = JsonSerializer.Deserialize<List<ReservasiItem>>(rootNode.GetProperty("Reservasi").ToString());
 
-            var reservasi = reservasiList?.FirstOrDefault(r =>
+            var reservasi = reservasiList?
+            .FirstOrDefault(r =>
                 r.Tempat.Equals(tempat, StringComparison.OrdinalIgnoreCase) &&
                 r.Ruangan.Equals(ruangan, StringComparison.OrdinalIgnoreCase) &&
+                r.Jadwal != null &&
                 r.Jadwal.Tanggal == tanggal &&
                 r.Jadwal.Mulai == jamMulai &&
-                r.Status == "Aktif"
-            );
+                r.Status == "Aktif");
 
             if (reservasi == null)
                 return NotFound("Reservasi tidak ditemukan atau sudah dibatalkan.");
 
-            // Validasi tambahan jika ada
             if (!Validators.Validasi.ValidasiPembatalan($"{tempat}-{ruangan}", alasan))
                 return BadRequest("Alasan pembatalan tidak valid.");
 

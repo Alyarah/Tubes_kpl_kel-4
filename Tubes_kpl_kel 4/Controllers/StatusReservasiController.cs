@@ -14,14 +14,12 @@ namespace Tubes_kpl_kel_4.Controllers
             _statusReservasi = new StatusReservasi();
         }
 
-        // GET: api/StatusReservasi
         [HttpGet]
         public IActionResult GetAllReservasi()
         {
             return Ok(_statusReservasi.DaftarReservasi);
         }
 
-        // GET: api/StatusReservasi/availability?tanggal=2025-05-20&mulai=08:00&selesai=10:00
         [HttpGet("availability")]
         public IActionResult GetAvailability([FromQuery] string tanggal, [FromQuery] string mulai, [FromQuery] string selesai)
         {
