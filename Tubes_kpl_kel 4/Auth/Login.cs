@@ -24,27 +24,24 @@ namespace Tubes_kpl_kel_4.Auth
 
         public string LoginUser(string nama, string email, string password)
         {
-
             bool validNama = Validasi.ValidasiNama(nama);
             bool validEmail = Validasi.ValidasiEmail(email);
             bool validPass = Validasi.ValidasiPassword(password);
 
-            var user = UserStorage.CariUser(nama, email, password);
-            if (user != null)
+            if (!validNama || !validEmail || !validPass)
             {
-                if (!validNama || !validEmail || !validPass)
-                {
-                    Status = StatusLogin.Gagal;
-                    return "Login gagal. Inputan tidak valid.";
-                }
-                else
-                {
-                    Nama = nama;
-                    Email = email;
-                    Password = password;
-                    Status = StatusLogin.Berhasil;
-                    return $"Login berhasil.\nNama: {nama}\nEmail: {email}";
-                }
+                Status = StatusLogin.Gagal;
+                return "Login gagal. Inputan tidak valid.";
+            }
+
+            bool userDitemukan = UserStorage.CariUser(nama, email, password);
+            if (userDitemukan)
+            {
+                Nama = nama;
+                Email = email;
+                Password = password;
+                Status = StatusLogin.Berhasil;
+                return $"Login berhasil.\nNama: {nama}\nEmail: {email}";
             }
             else
             {

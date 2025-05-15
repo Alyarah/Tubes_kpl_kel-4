@@ -1,6 +1,4 @@
-﻿using Tubes_kpl_kel_4.Reservasi;
-
-namespace Tubes_kpl_kel_4.Models
+﻿namespace Tubes_kpl_kel_4.Models
 {
     public class RiwayatModel
     {

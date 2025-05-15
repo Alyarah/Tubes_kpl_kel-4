@@ -103,7 +103,6 @@ namespace Tubes_kpl_kel_4
                                         Console.WriteLine("Masukkan jam selesai (HH:mm): ");
                                         string jamSelesai = Console.ReadLine();
 
-                                        // Panggil fungsi LakukanReservasi untuk mencoba melakukan reservasi
                                         string hasilReservasi = reservasiRuangan.LakukanReservasi(
                                             tempat, ruangan, kapasitas, tanggal, jamMulai, jamSelesai);
                                         Console.WriteLine(hasilReservasi);
