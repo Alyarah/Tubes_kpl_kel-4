@@ -1,4 +1,5 @@
-﻿using Tubes_kpl_kel_4.Validators;
+﻿using System;
+using Tubes_kpl_kel_4.Validators;
 
 namespace Tubes_kpl_kel_4
 {
@@ -16,22 +17,37 @@ namespace Tubes_kpl_kel_4
 
         public PembatalanReservasi(string kodeKelas)
         {
+            if (string.IsNullOrWhiteSpace(kodeKelas))
+                throw new ArgumentException("Kode kelas tidak boleh kosong.");
+
             KodeKelas = kodeKelas;
             Status = StatusReservasi.Aktif;
         }
 
         public bool Batalkan(string alasan)
         {
-            if (Status == StatusReservasi.Aktif &&
-                Validasi.ValidasiPembatalan(KodeKelas, alasan))
+            try
             {
+                if (Status != StatusReservasi.Aktif)
+                    throw new InvalidOperationException("Reservasi tidak dalam status aktif.");
+
+                if (!Validasi.ValidasiPembatalan(KodeKelas, alasan))
+                    throw new ArgumentException("Alasan pembatalan tidak valid.");
+
                 Status = StatusReservasi.Dibatalkan;
                 AlasanPembatalan = alasan;
+
+                if (Status != StatusReservasi.Dibatalkan || AlasanPembatalan != alasan)
+                    throw new InvalidOperationException("Postcondition gagal: status atau alasan tidak sesuai.");
+
                 Console.WriteLine("Reservasi berhasil dibatalkan.");
                 return true;
             }
-            Console.WriteLine("Pembatalan gagal. Data tidak valid atau status bukan Aktif.");
-            return false;
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Pembatalan gagal: {ex.Message}");
+                return false;
+            }
         }
     }
 }
