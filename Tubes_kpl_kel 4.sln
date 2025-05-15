@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tubes_kpl_kel 4", "Tubes_kp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{F1AABAB3-D7B4-4787-9CEE-828B5B6B1923}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{515C02AD-E4A3-47A7-A778-3887E423DAA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F1AABAB3-D7B4-4787-9CEE-828B5B6B1923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1AABAB3-D7B4-4787-9CEE-828B5B6B1923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1AABAB3-D7B4-4787-9CEE-828B5B6B1923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515C02AD-E4A3-47A7-A778-3887E423DAA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515C02AD-E4A3-47A7-A778-3887E423DAA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515C02AD-E4A3-47A7-A778-3887E423DAA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515C02AD-E4A3-47A7-A778-3887E423DAA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

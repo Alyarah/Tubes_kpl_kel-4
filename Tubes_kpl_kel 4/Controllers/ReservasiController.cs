@@ -1,6 +1,4 @@
-﻿ReservasiController
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using Tubes_kpl_kel_4;

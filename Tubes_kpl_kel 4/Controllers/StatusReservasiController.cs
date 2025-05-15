@@ -1,6 +1,4 @@
-﻿statusReservasiController
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4.Controllers
