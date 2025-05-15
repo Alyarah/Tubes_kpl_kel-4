@@ -7,7 +7,7 @@ namespace Tubes_kpl_kel_4.Reservasi
     public class StatusReservasi
     {
         public List<DataReservasi> DaftarReservasi { get; set; } = new List<DataReservasi>();
-        public const string filePath = "D:\\Praktikum Konstruksi PL\\Tubes_kpl_kel 4\\Tubes_kpl_kel 4\\Kelas.json";
+        public string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
         public StatusReservasi()
         {
             try
