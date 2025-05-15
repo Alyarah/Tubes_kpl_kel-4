@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Tubes_kpl_kel_4.Models;
 
 namespace Tubes_kpl_kel_4
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum StatusReservasiEnum
     {
         Aktif,

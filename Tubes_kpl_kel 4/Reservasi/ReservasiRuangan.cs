@@ -1,5 +1,6 @@
 ﻿using Tubes_kpl_kel_4;
 using Tubes_kpl_kel_4.Models;
+using Tubes_kpl_kel_4.Reservasi;
 
 public class ReservasiRuangan
 {
@@ -7,13 +8,15 @@ public class ReservasiRuangan
     private List<Jadwal> _jadwalList;
     private List<DataReservasi> _reservasiList;
     private DaftarKelas _daftarKelas;
+    private StatusReservasi _statusReservasi;
 
-    public ReservasiRuangan(User user, List<Jadwal> jadwalList, List<DataReservasi> reservasiList, DaftarKelas daftarKelas)
+    public ReservasiRuangan(User user, List<Jadwal> jadwalList, List<DataReservasi> reservasiList, DaftarKelas daftarKelas, StatusReservasi statusReservasi)
     {
         _user = user;
         _jadwalList = jadwalList;
         _reservasiList = reservasiList;
         _daftarKelas = daftarKelas;
+        _statusReservasi = statusReservasi;
     }
 
     public string LakukanReservasi(string tempat, string ruangan, int kapasitas, string tanggal, string jamMulai, string jamSelesai)
@@ -56,10 +59,14 @@ public class ReservasiRuangan
             Tempat = tempat,
             Ruangan = ruangan,
             Kapasitas = kapasitas,
-            jReservasi = jadwalReservasiBaru
+            jReservasi = jadwalReservasiBaru,
+            Status = StatusReservasiEnum.Aktif,
+            AlasanPembatalan = ""
         };
 
         _reservasiList.Add(dataBaru);
+        _statusReservasi.DaftarReservasi.Add(dataBaru);
+        _statusReservasi.SimpanReservasiKeFile();
 
         return $"Sukses: Reservasi oleh {_user.Nama} untuk {tempat} {ruangan} pada {tanggal} {jamMulai}-{jamSelesai} berhasil.";
     }

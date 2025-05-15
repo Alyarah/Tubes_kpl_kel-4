@@ -59,7 +59,9 @@
       },
       "Tempat": "Gedung A",
       "Ruangan": "R.01",
-      "Kapasitas": 40
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan" : ""
     },
     {
       "Jadwal Reservasi": {
@@ -70,7 +72,9 @@
       },
       "Tempat": "Gedung A",
       "Ruangan": "R.03",
-      "Kapasitas": 40
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan": ""
     },
     {
       "Jadwal Reservasi": {
@@ -81,7 +85,9 @@
       },
       "Tempat": "Gedung A",
       "Ruangan": "R.05",
-      "Kapasitas": 40
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan": ""
     },
     {
       "Jadwal Reservasi": {
@@ -92,7 +98,9 @@
       },
       "Tempat": "Gedung A",
       "Ruangan": "R.01",
-      "Kapasitas": 40
+      "Kapasitas": 40,
+      "Status": "Dibatalkan",
+      "AlasanPembatalan": "Ingin mengubah jadwal"
     },
     {
       "Jadwal Reservasi": {
@@ -103,7 +111,9 @@
       },
       "Tempat": "Gedung B",
       "Ruangan": "R.01",
-      "Kapasitas": 40
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan": ""
     }
   ]
 }

@@ -58,11 +58,12 @@ namespace Tubes_kpl_kel_4
                         if (login.Status == StatusLogin.Berhasil)
                         {
                             var currentUser = new User { Nama = nama, Email = email };
-                            var daftarKelas = new DaftarKelas("data.json");
+                            var daftarKelas = new DaftarKelas("Kelas/ListKelas.json");
                             var listJadwal = daftarKelas.ListKelas;
                             var listReservasi = new List<DataReservasi>();
+                            var statusReservasi = new StatusReservasi();
 
-                            var reservasiRuangan = new ReservasiRuangan(currentUser, listJadwal, listReservasi, daftarKelas);
+        var reservasiRuangan = new ReservasiRuangan(currentUser, listJadwal, listReservasi, daftarKelas, statusReservasi);
 
                             bool logout = false;
                             while (!logout)
@@ -129,7 +130,6 @@ namespace Tubes_kpl_kel_4
                                         break;
 
                                     case "4":
-                                        var statusReservasi = new StatusReservasi();
                                         statusReservasi.PrintStatusReservasi();
                                         break;
 

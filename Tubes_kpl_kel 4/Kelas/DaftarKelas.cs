@@ -11,6 +11,7 @@ namespace Tubes_kpl_kel_4
 
         public DaftarKelas(string configPath)
         {
+            filePath = configPath;
             try
             {
                 ReadJadwalConfig();
@@ -32,15 +33,17 @@ namespace Tubes_kpl_kel_4
             String configJsonData = File.ReadAllText(filePath);
             var config = JsonSerializer.Deserialize<JadwalConfig>(configJsonData);
 
-            if (config?.Jadwal != null)
-            {
-                ListKelas = config.Jadwal;
-            }
-            else
+            if (config?.Jadwal == null)
             {
                 Console.WriteLine("Data 'Jadwal' tidak ditemukan dalam file JSON.");
                 ListKelas = new List<Jadwal>();
             }
+            else
+            {
+                ListKelas = config.Jadwal;
+
+            }
+
         }
 
         private void WriteNewConfigFile()
@@ -49,7 +52,7 @@ namespace Tubes_kpl_kel_4
             {
                 WriteIndented = true
             };
-            String jsonString = JsonSerializer.Serialize(ListKelas, options);
+            String jsonString = JsonSerializer.Serialize(new JadwalConfig { Jadwal = ListKelas }, options);
             File.WriteAllText(filePath, jsonString);
         }
         public void PrintDaftarKelas()

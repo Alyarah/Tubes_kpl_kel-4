@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Tubes_kpl_kel_4;
 using Tubes_kpl_kel_4.Models;
+using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4.Controllers
 {
@@ -19,6 +20,8 @@ namespace Tubes_kpl_kel_4.Controllers
         private static List<DataReservasi> _reservasiList = new();
 
         private static User _currentUser = new User { Nama = "Sheila" };
+        private StatusReservasi _statusReservasi;
+
 
         public class ReservasiRequest
         {
@@ -33,7 +36,7 @@ namespace Tubes_kpl_kel_4.Controllers
         [HttpPost]
         public IActionResult PostReservasi([FromBody] ReservasiRequest request)
         {
-            var reservasiService = new ReservasiRuangan(_currentUser, _jadwalList, _reservasiList, _daftarKelas);
+            var reservasiService = new ReservasiRuangan(_currentUser, _jadwalList, _reservasiList, _daftarKelas, _statusReservasi);
 
             string hasil = reservasiService.LakukanReservasi(
                 request.Tempat,

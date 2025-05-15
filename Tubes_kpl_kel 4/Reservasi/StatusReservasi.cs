@@ -1,6 +1,8 @@
 ﻿using System.Text.Json.Nodes;
 using System.Text.Json;
 using Tubes_kpl_kel_4.Models;
+using System.Text.Json.Serialization;
+using System;
 
 namespace Tubes_kpl_kel_4.Reservasi
 {
@@ -27,18 +29,42 @@ namespace Tubes_kpl_kel_4.Reservasi
         {
             string configJsonData = File.ReadAllText(filePath);
             var node = JsonNode.Parse(configJsonData);
+            if (node == null)
+            {
+                Console.WriteLine("File JSON kosong atau tidak valid.");
+                DaftarReservasi = new List<DataReservasi>();
+                return;
+            }
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() }
+            };
+
             var reservasiArray = node["Reservasi"];
-            DaftarReservasi = reservasiArray.Deserialize<List<DataReservasi>>();
+            if(reservasiArray == null)
+    {
+                Console.WriteLine("Data 'Reservasi' tidak ditemukan dalam file JSON.");
+                DaftarReservasi = new List<DataReservasi>();
+                return;
+            }
+            DaftarReservasi = reservasiArray.Deserialize<List<DataReservasi>>(options);
         }
 
         private void WriteNewConfigFile()
         {
-            JsonSerializerOptions options = new JsonSerializerOptions()
+            var jsonNode = new JsonObject
             {
-                WriteIndented = true
+                ["Reservasi"] = JsonSerializer.SerializeToNode(DaftarReservasi, new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    Converters = { new JsonStringEnumConverter() }
+                })
             };
-            String jsonString = JsonSerializer.Serialize(DaftarReservasi, options);
-            File.WriteAllText(filePath, jsonString);
+            File.WriteAllText(filePath, jsonNode.ToJsonString(new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Converters = { new JsonStringEnumConverter() }
+            }));
         }
         public void PrintStatusReservasi()
         {
@@ -141,5 +167,20 @@ namespace Tubes_kpl_kel_4.Reservasi
                 Console.WriteLine($"{ruangan.Tempat} | {ruangan.Ruangan} => {status}");
             }
         }
+
+        public void SimpanReservasiKeFile()
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                Converters = { new JsonStringEnumConverter() }
+            };
+            var jsonNode = new JsonObject
+            {
+                ["Reservasi"] = JsonSerializer.SerializeToNode(DaftarReservasi, options)
+            };
+            File.WriteAllText(filePath, jsonNode.ToJsonString(options));
+        }
+
     }
 }
