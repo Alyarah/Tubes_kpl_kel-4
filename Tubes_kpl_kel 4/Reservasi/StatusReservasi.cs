@@ -7,6 +7,7 @@ namespace Tubes_kpl_kel_4.Reservasi
     public class StatusReservasi
     {
         public List<DataReservasi> DaftarReservasi { get; set; } = new List<DataReservasi>();
+
         public string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
         public StatusReservasi()
         {
@@ -47,6 +48,7 @@ namespace Tubes_kpl_kel_4.Reservasi
                 Console.WriteLine("Tidak ada reservasi yang tersedia.");
                 return;
             }
+
             foreach (var res in DaftarReservasi)
             {
                 Console.WriteLine($"{res.Tempat} | {res.Ruangan} | Kapasitas {res.Kapasitas} orang");
@@ -54,10 +56,17 @@ namespace Tubes_kpl_kel_4.Reservasi
                 Console.WriteLine($"Nama Pemesan : {jadwal.NamaUser}");
                 Console.WriteLine($"Tanggal :  {jadwal.Tanggal}");
                 Console.WriteLine($"Jam : {jadwal.Mulai} - {jadwal.Selesai}");
-                Console.WriteLine();
+                Console.WriteLine($"Status : {res.Status}");
 
+                if (res.Status == StatusReservasiEnum.Dibatalkan && !string.IsNullOrWhiteSpace(res.AlasanPembatalan))
+                {
+                    Console.WriteLine($"Alasan Pembatalan : {res.AlasanPembatalan}");
+                }
+
+                Console.WriteLine();
             }
         }
+
         public void TampilkanDaftarKelas(string hariFilter = "", int kapasitasFilter = 0)
         {
             Console.WriteLine("=== Daftar Kelas ===");

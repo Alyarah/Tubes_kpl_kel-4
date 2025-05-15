@@ -1,4 +1,5 @@
 ﻿using System;
+using Tubes_kpl_kel_4.Reservasi;
 using Tubes_kpl_kel_4.Validators;
 
 namespace Tubes_kpl_kel_4
@@ -12,33 +13,34 @@ namespace Tubes_kpl_kel_4
     public class PembatalanReservasi
     {
         public StatusReservasiEnum Status { get; private set; }
-        public string KodeKelas { get; }
         public string AlasanPembatalan { get; private set; }
 
-        public PembatalanReservasi(string kodeKelas)
-        {
-            if (string.IsNullOrWhiteSpace(kodeKelas))
-                throw new ArgumentException("Kode kelas tidak boleh kosong.");
+        private List<DataReservasi> _listReservasi;
 
-            KodeKelas = kodeKelas;
-            Status = StatusReservasiEnum.Aktif;
+        public PembatalanReservasi(List<DataReservasi> listReservasi)
+        {
+            _listReservasi = listReservasi;
         }
 
-        public bool Batalkan(string alasan)
+        public bool Batalkan(string tempat, string ruangan, string tanggal, string jamMulai, string alasan)
         {
             try
             {
-                if (Status != StatusReservasiEnum.Aktif)
-                    throw new InvalidOperationException("Reservasi tidak dalam status aktif.");
+                var target = _listReservasi.FirstOrDefault(r =>
+                    r.Tempat.Equals(tempat, StringComparison.OrdinalIgnoreCase) &&
+                    r.Ruangan.Equals(ruangan, StringComparison.OrdinalIgnoreCase) &&
+                    r.jReservasi.Tanggal == tanggal &&
+                    r.jReservasi.Mulai == jamMulai &&
+                    r.Status == StatusReservasiEnum.Aktif);
 
-                if (!Validasi.ValidasiPembatalan(KodeKelas, alasan))
+                if (target == null)
+                    throw new InvalidOperationException("Reservasi tidak ditemukan atau sudah dibatalkan.");
+
+                if (!Validasi.ValidasiAlasan(alasan))
                     throw new ArgumentException("Alasan pembatalan tidak valid.");
 
-                Status = StatusReservasiEnum.Dibatalkan;
-                AlasanPembatalan = alasan;
-
-                if (Status != StatusReservasiEnum.Dibatalkan || AlasanPembatalan != alasan)
-                    throw new InvalidOperationException("Postcondition gagal: status atau alasan tidak sesuai.");
+                target.Status = StatusReservasiEnum.Dibatalkan;
+                target.AlasanPembatalan = alasan;
 
                 Console.WriteLine("Reservasi berhasil dibatalkan.");
                 return true;
@@ -51,3 +53,4 @@ namespace Tubes_kpl_kel_4
         }
     }
 }
+

@@ -2,6 +2,8 @@ using System;
 using Tubes_kpl_kel_4.Auth;
 using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Reservasi;
+using Tubes_kpl_kel_4.RiwayatReservasi;
+using Tubes_kpl_kel_4.Feedback;
 
 namespace Tubes_kpl_kel_4
 {
@@ -108,24 +110,45 @@ namespace Tubes_kpl_kel_4
                                         break;
 
                                     case "3":
-                                        Console.WriteLine("[Batalkan Reservasi] Fitur belum diimplementasikan.");
-                                        // Panggil fungsi untuk membatalkan reservasi
+                                        Console.WriteLine("Masukkan tempat:");
+                                        string tempatBatal = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan ruangan:");
+                                        string ruanganBatal = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan tanggal (yyyy-MM-dd):");
+                                        string tanggalBatal = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan jam mulai (HH:mm):");
+                                        string jamMulaiBatal = Console.ReadLine();
+
+                                        Console.WriteLine("Masukkan alasan pembatalan:");
+                                        string alasan = Console.ReadLine();
+
+                                        var pembatal = new PembatalanReservasi(listReservasi);
+                                        bool berhasilBatal = pembatal.Batalkan(tempatBatal, ruanganBatal, tanggalBatal, jamMulaiBatal, alasan);
                                         break;
 
                                     case "4":
-                                        Console.WriteLine("[Status Reservasi] Fitur belum diimplementasikan.");
-                                        // Panggil fungsi untuk melihat status reservasi
+                                        var statusReservasi = new StatusReservasi();
+                                        statusReservasi.PrintStatusReservasi();
                                         break;
 
                                     case "5":
-                                        Console.WriteLine("[Riwayat] Fitur belum diimplementasikan.");
-                                        // Panggil fungsi untuk melihat riwayat
+                                        var riwayat = new KelasRiwayatReservasi(listReservasi, currentUser.Nama);
+                                        riwayat.PrintRiwayat();
                                         break;
 
+
                                     case "6":
-                                        Console.WriteLine("[Feedback] Fitur belum diimplementasikan.");
-                                        // Panggil fungsi untuk memberikan feedback
+                                        var feedbackManager = new FeedbackManager();
+
+                                        Console.WriteLine("Masukkan feedback Anda:");
+                                        string feedback = Console.ReadLine();
+
+                                        feedbackManager.TambahFeedback(feedback);
                                         break;
+
 
                                     case "7":
                                         logout = true;

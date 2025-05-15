@@ -18,5 +18,7 @@ namespace Tubes_kpl_kel_4.Reservasi
         public string Tempat { get; set; }
         public string Ruangan { get; set; }
         public int Kapasitas { get; set; }
+        public StatusReservasiEnum Status { get; set; } = StatusReservasiEnum.Aktif;
+        public string AlasanPembatalan { get; set; }
     }
 }

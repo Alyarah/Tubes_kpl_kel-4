@@ -12,8 +12,13 @@ namespace Tubes_kpl_kel_4.Controllers
     {
         private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
 
-        [HttpDelete("{kodeKelas}")]
-        public IActionResult BatalkanReservasi(string kodeKelas, [FromQuery] string alasan)
+        [HttpDelete]
+        public IActionResult BatalkanReservasi(
+            [FromQuery] string tempat,
+            [FromQuery] string ruangan,
+            [FromQuery] string tanggal,
+            [FromQuery] string jamMulai,
+            [FromQuery] string alasan)
         {
             if (string.IsNullOrWhiteSpace(alasan))
                 return BadRequest("Alasan pembatalan diperlukan.");
@@ -23,20 +28,22 @@ namespace Tubes_kpl_kel_4.Controllers
 
             var json = System.IO.File.ReadAllText(_filePath);
             var rootNode = JsonDocument.Parse(json).RootElement;
-
             var reservasiList = JsonSerializer.Deserialize<List<ReservasiItem>>(rootNode.GetProperty("Reservasi").ToString());
 
             var reservasi = reservasiList?.FirstOrDefault(r =>
-                $"{r.Tempat}-{r.Ruangan}".Replace(" ", "").Equals(kodeKelas.Replace(" ", ""), StringComparison.OrdinalIgnoreCase)
-                && r.Status == "Aktif"
+                r.Tempat.Equals(tempat, StringComparison.OrdinalIgnoreCase) &&
+                r.Ruangan.Equals(ruangan, StringComparison.OrdinalIgnoreCase) &&
+                r.Jadwal.Tanggal == tanggal &&
+                r.Jadwal.Mulai == jamMulai &&
+                r.Status == "Aktif"
             );
 
             if (reservasi == null)
-                return NotFound("Reservasi dengan kode tersebut tidak ditemukan atau sudah dibatalkan.");
+                return NotFound("Reservasi tidak ditemukan atau sudah dibatalkan.");
 
-            var pembatalan = new PembatalanReservasi(kodeKelas);
-            if (!pembatalan.Batalkan(alasan))
-                return BadRequest("Pembatalan gagal.");
+            // Validasi tambahan jika ada
+            if (!Validators.Validasi.ValidasiPembatalan($"{tempat}-{ruangan}", alasan))
+                return BadRequest("Alasan pembatalan tidak valid.");
 
             reservasi.Status = "Dibatalkan";
             reservasi.AlasanPembatalan = alasan;
@@ -50,4 +57,3 @@ namespace Tubes_kpl_kel_4.Controllers
         }
     }
 }
-
