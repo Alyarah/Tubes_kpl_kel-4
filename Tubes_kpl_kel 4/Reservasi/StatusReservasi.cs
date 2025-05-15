@@ -1,20 +1,22 @@
-﻿using System.Text.Json.Nodes;
-using System.Text.Json;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
 using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4.Reservasi
 {
     public class StatusReservasi
     {
-        public List<DataReservasi> DaftarReservasi { get; set; } = new List<DataReservasi>();
+        public List<DataReservasi> DaftarReservasi { get; set; } = new();
+
         public const string filePath = "D:\\Praktikum Konstruksi PL\\Tubes_kpl_kel 4\\Tubes_kpl_kel 4\\Kelas.json";
+
         public StatusReservasi()
         {
             try
             {
                 ReadStatusReservasi();
             }
-            catch (Exception)
+            catch
             {
                 Console.WriteLine("Gagal membaca konfigurasi");
                 DaftarReservasi = new List<DataReservasi>();
@@ -32,13 +34,11 @@ namespace Tubes_kpl_kel_4.Reservasi
 
         private void WriteNewConfigFile()
         {
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                WriteIndented = true
-            };
-            String jsonString = JsonSerializer.Serialize(DaftarReservasi, options);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(DaftarReservasi, options);
             File.WriteAllText(filePath, jsonString);
         }
+
         public void PrintStatusReservasi()
         {
             Console.WriteLine("=== Status Reservasi ===");
@@ -47,89 +47,75 @@ namespace Tubes_kpl_kel_4.Reservasi
                 Console.WriteLine("Tidak ada reservasi yang tersedia.");
                 return;
             }
+
             foreach (var res in DaftarReservasi)
             {
-                Console.WriteLine($"{res.Tempat} | {res.Ruangan} | Kapasitas {res.Kapasitas} orang");
-                var jadwal = res.jReservasi;
+                var jadwal = res.JadwalDetail;
+                Console.WriteLine($"{res.NamaTempat} | {res.NamaRuangan} | Kapasitas {res.KapasitasRuangan} orang");
                 Console.WriteLine($"Nama Pemesan : {jadwal.NamaUser}");
                 Console.WriteLine($"Tanggal :  {jadwal.Tanggal}");
-                Console.WriteLine($"Jam : {jadwal.Mulai} - {jadwal.Selesai}");
+                Console.WriteLine($"Jam : {jadwal.JamMulai} - {jadwal.JamSelesai}");
                 Console.WriteLine();
-
             }
         }
+
         public void TampilkanDaftarKelas(string hariFilter = "", int kapasitasFilter = 0)
         {
             Console.WriteLine("=== Daftar Kelas ===");
-            var filteredKelas = DaftarReservasi;
+            var filtered = DaftarReservasi;
+
             if (!string.IsNullOrEmpty(hariFilter))
             {
-                filteredKelas = filteredKelas.Where(r => r.jReservasi.Tanggal.Contains(hariFilter)).ToList();
+                filtered = filtered.Where(r => r.JadwalDetail.Tanggal.Contains(hariFilter)).ToList();
             }
 
             if (kapasitasFilter > 0)
             {
-                filteredKelas = filteredKelas.Where(r => r.Kapasitas >= kapasitasFilter).ToList();
+                filtered = filtered.Where(r => r.KapasitasRuangan >= kapasitasFilter).ToList();
             }
 
-            if (filteredKelas.Count == 0)
+            if (filtered.Count == 0)
             {
                 Console.WriteLine("Tidak ada kelas yang sesuai dengan preferensi.");
                 return;
             }
 
-            foreach (var res in filteredKelas)
+            foreach (var res in filtered)
             {
-                Console.WriteLine($"{res.Tempat} | {res.Ruangan} | Kapasitas {res.Kapasitas} orang");
-                Console.WriteLine($"Nama Pemesan: {res.jReservasi.NamaUser}");
-                Console.WriteLine($"Tanggal: {res.jReservasi.Tanggal}");
-                Console.WriteLine($"Jam: {res.jReservasi.Mulai} - {res.jReservasi.Selesai}");
+                var jadwal = res.JadwalDetail;
+                Console.WriteLine($"{res.NamaTempat} | {res.NamaRuangan} | Kapasitas {res.KapasitasRuangan} orang");
+                Console.WriteLine($"Nama Pemesan : {jadwal.NamaUser}");
+                Console.WriteLine($"Tanggal : {jadwal.Tanggal}");
+                Console.WriteLine($"Jam : {jadwal.JamMulai} - {jadwal.JamSelesai}");
                 Console.WriteLine();
             }
         }
 
-        public void StatusRuangan(string Tanggal, string Mulai, string Selesai)
+        public void StatusRuangan(string tanggal, string mulai, string selesai)
         {
             Console.WriteLine("=== Status Ketersediaan Ruangan ===");
 
-            var semuaRuangan = new List<(string Tempat, string Ruangan)>
+            var semuaRuangan = new List<(string NamaTempat, string NamaRuangan)>
             {
-                ("Gedung A", "R.01"),
-                ("Gedung A", "R.02"),
-                ("Gedung A", "R.03"),
-                ("Gedung A", "R.04"),
-                ("Gedung A", "R.05"),
-                ("Gedung B", "R.01"),
-                ("Gedung B", "R.02"),
-                ("Gedung B", "R.03"),
-                ("Gedung B", "R.04"),
-                ("Gedung B", "R.05"),
-                ("Lab", "01"),
-                ("Lab", "02")
+                ("Gedung A", "R.01"), ("Gedung A", "R.02"), ("Gedung A", "R.03"),
+                ("Gedung A", "R.04"), ("Gedung A", "R.05"),
+                ("Gedung B", "R.01"), ("Gedung B", "R.02"), ("Gedung B", "R.03"),
+                ("Gedung B", "R.04"), ("Gedung B", "R.05"),
+                ("Lab", "01"), ("Lab", "02")
             };
 
             foreach (var ruangan in semuaRuangan)
             {
-                bool dipesan = false;
-
-                foreach (var reservasi in DaftarReservasi)
-                {
-                    if (reservasi.Tempat == ruangan.Tempat && reservasi.Ruangan == ruangan.Ruangan)
-                    {
-                        var jadwal = reservasi.jReservasi;
-                        if (jadwal.Tanggal == Tanggal)
-                        {
-                            if (reservasi.Tempat == ruangan.Tempat && reservasi.Ruangan == ruangan.Ruangan)
-                            {
-                                dipesan = true;
-                                break;
-                            }
-                        }
-                    }
-                }
+                bool dipesan = DaftarReservasi.Any(res =>
+                    res.NamaTempat == ruangan.NamaTempat &&
+                    res.NamaRuangan == ruangan.NamaRuangan &&
+                    res.JadwalDetail.Tanggal == tanggal &&
+                    mulai.CompareTo(res.JadwalDetail.JamSelesai) < 0 &&
+                    selesai.CompareTo(res.JadwalDetail.JamMulai) > 0
+                );
 
                 string status = dipesan ? "Sudah Dipesan" : "Tersedia";
-                Console.WriteLine($"{ruangan.Tempat} | {ruangan.Ruangan} => {status}");
+                Console.WriteLine($"{ruangan.NamaTempat} | {ruangan.NamaRuangan} => {status}");
             }
         }
     }

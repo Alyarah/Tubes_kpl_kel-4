@@ -2,24 +2,23 @@
 {
     public class Jadwal
     {
-        public string Tempat { get; set; }
-        public string Ruangan { get; set; }
-        public int Kapasitas { get; set; }
+        public string NamaTempat { get; set; }
+        public string NamaRuangan { get; set; }
+        public int KapasitasRuangan { get; set; }
         public string Hari { get; set; }
-        public string Mulai { get; set; }
-        public string Selesai { get; set; }
+        public string JamMulai { get; set; }
+        public string JamSelesai { get; set; }
 
         public Jadwal() { }
 
-        public Jadwal(string Tempat, string Ruangan, int Kapasitas, string Hari, string Mulai, string Selesai)
+        public Jadwal(string namaTempat, string namaRuangan, int kapasitasRuangan, string hari, string jamMulai, string jamSelesai)
         {
-            Tempat = Tempat;
-            Ruangan = Ruangan;
-            Kapasitas = Kapasitas;
-            Hari = Hari;
-            Mulai = Mulai;
-            Selesai = Selesai;
+            NamaTempat = namaTempat;
+            NamaRuangan = namaRuangan;
+            KapasitasRuangan = kapasitasRuangan;
+            Hari = hari;
+            JamMulai = jamMulai;
+            JamSelesai = jamSelesai;
         }
     }
-
 }

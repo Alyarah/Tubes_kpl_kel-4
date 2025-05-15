@@ -1,68 +1,79 @@
-﻿using Tubes_kpl_kel_4;
+﻿using System;
+using System.Collections.Generic;
 using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Reservasi;
 
-public class ReservasiRuangan
+namespace Tubes_kpl_kel_4
 {
-    private User _user;
-    private List<Jadwal> _jadwalList;
-    private List<DataReservasi> _reservasiList;
-    private DaftarKelas _daftarKelas;
-
-    public ReservasiRuangan(User user, List<Jadwal> jadwalList, List<DataReservasi> reservasiList, DaftarKelas daftarKelas)
+    public class ReservasiRuangan
     {
-        _user = user;
-        _jadwalList = jadwalList;
-        _reservasiList = reservasiList;
-        _daftarKelas = daftarKelas;
-    }
+        private User _user;
+        private List<Jadwal> _jadwalList;
+        private List<DataReservasi> _reservasiList;
+        private DaftarKelas _daftarKelas;
 
-    public string LakukanReservasi(string tempat, string ruangan, int kapasitas, string tanggal, string jamMulai, string jamSelesai)
-    {
-        DateTime tanggalReservasi = DateTime.Parse(tanggal);
-        string hariDariTanggal = tanggalReservasi.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
-
-        foreach (var jadwal in _jadwalList)
+        public ReservasiRuangan(User user, List<Jadwal> jadwalList, List<DataReservasi> reservasiList, DaftarKelas daftarKelas)
         {
-            if (jadwal.Tempat == tempat && jadwal.Ruangan == ruangan && jadwal.Hari.Equals(hariDariTanggal, StringComparison.OrdinalIgnoreCase))
-            {
-                if (jamMulai.CompareTo(jadwal.Selesai) < 0 && jamSelesai.CompareTo(jadwal.Mulai) > 0)
-                {
-                    return $"Gagal: Jadwal tetap di {tempat} {ruangan} bentrok dengan waktu {jadwal.Mulai}-{jadwal.Selesai}.";
-                }
-            }
+            _user = user;
+            _jadwalList = jadwalList;
+            _reservasiList = reservasiList;
+            _daftarKelas = daftarKelas;
         }
 
-        foreach (var reservasi in _reservasiList)
+        public string LakukanReservasi(string namaTempat, string namaRuangan, int kapasitas, string tanggal, string jamMulai, string jamSelesai)
         {
-            if (reservasi.Tempat == tempat && reservasi.Ruangan == ruangan && reservasi.jReservasi.Tanggal == tanggal)
+            DateTime tanggalReservasi = DateTime.Parse(tanggal);
+            string hariDariTanggal = tanggalReservasi.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+
+            // Cek bentrok dengan jadwal tetap
+            foreach (var jadwal in _jadwalList)
             {
-                if (jamMulai.CompareTo(reservasi.jReservasi.Selesai) < 0 && jamSelesai.CompareTo(reservasi.jReservasi.Mulai) > 0)
+                if (jadwal.NamaTempat == namaTempat &&
+                    jadwal.NamaRuangan == namaRuangan &&
+                    jadwal.Hari.Equals(hariDariTanggal, StringComparison.OrdinalIgnoreCase))
                 {
-                    return $"Gagal: Sudah dipesan oleh {reservasi.jReservasi.NamaUser} dari {reservasi.jReservasi.Mulai} sampai {reservasi.jReservasi.Selesai}.";
+                    if (jamMulai.CompareTo(jadwal.JamSelesai) < 0 && jamSelesai.CompareTo(jadwal.JamMulai) > 0)
+                    {
+                        return $"Gagal: Jadwal tetap di {namaTempat} {namaRuangan} bentrok dengan waktu {jadwal.JamMulai}-{jadwal.JamSelesai}.";
+                    }
                 }
             }
+
+            // Cek bentrok dengan reservasi lain
+            foreach (var reservasi in _reservasiList)
+            {
+                if (reservasi.NamaTempat == namaTempat &&
+                    reservasi.NamaRuangan == namaRuangan &&
+                    reservasi.JadwalDetail.Tanggal == tanggal)
+                {
+                    if (jamMulai.CompareTo(reservasi.JadwalDetail.JamSelesai) < 0 &&
+                        jamSelesai.CompareTo(reservasi.JadwalDetail.JamMulai) > 0)
+                    {
+                        return $"Gagal: Sudah dipesan oleh {reservasi.JadwalDetail.NamaUser} dari {reservasi.JadwalDetail.JamMulai} sampai {reservasi.JadwalDetail.JamSelesai}.";
+                    }
+                }
+            }
+
+            // Buat reservasi baru
+            JadwalReservasi jadwalReservasiBaru = new JadwalReservasi
+            {
+                NamaUser = _user.Nama,
+                Tanggal = tanggal,
+                JamMulai = jamMulai,
+                JamSelesai = jamSelesai
+            };
+
+            DataReservasi dataBaru = new DataReservasi
+            {
+                NamaTempat = namaTempat,
+                NamaRuangan = namaRuangan,
+                KapasitasRuangan = kapasitas,
+                JadwalDetail = jadwalReservasiBaru
+            };
+
+            _reservasiList.Add(dataBaru);
+
+            return $"Sukses: Reservasi oleh {_user.Nama} untuk {namaTempat} {namaRuangan} pada {tanggal} {jamMulai}-{jamSelesai} berhasil.";
         }
-
-        JadwalReservasi jadwalReservasiBaru = new JadwalReservasi
-        {
-            NamaUser = _user.Nama,
-            Tanggal = tanggal,
-            Mulai = jamMulai,
-            Selesai = jamSelesai
-        };
-
-        DataReservasi dataBaru = new DataReservasi
-        {
-            Tempat = tempat,
-            Ruangan = ruangan,
-            Kapasitas = kapasitas,
-            jReservasi = jadwalReservasiBaru
-        };
-
-        _reservasiList.Add(dataBaru);
-
-        return $"Sukses: Reservasi oleh {_user.Nama} untuk {tempat} {ruangan} pada {tanggal} {jamMulai}-{jamSelesai} berhasil.";
     }
-
 }
