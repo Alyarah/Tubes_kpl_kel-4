@@ -45,7 +45,7 @@ namespace Tubes_kpl_kel_4.Controllers
                 request.JamSelesai
             );
 
-            if (hasil.StartsWith("Suksesssss"))
+            if (hasil.StartsWith("Sukses"))
                 return Ok(new { message = hasil });
             else
                 return BadRequest(new { error = hasil });

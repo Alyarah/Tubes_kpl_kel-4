@@ -15,19 +15,19 @@ namespace Tubes_kpl_kel_4.Controllers
             _statusReservasi = new StatusReservasi();
         }
 
-       
+
         [HttpGet]
         public ActionResult<List<DataReservasi>> GetStatusReservasi()
         {
             if (_statusReservasi.DaftarReservasi == null || !_statusReservasi.DaftarReservasi.Any())
             {
-                return NotFound("Tidak ada data reservasi ditemukannnnnnnnn.");
+                return NotFound("Tidak ada data reservasi ditemukan.");
             }
 
             return Ok(_statusReservasi.DaftarReservasi);
         }
 
-        
+
         [HttpGet("filter")]
         public ActionResult<List<DataReservasi>> GetFilteredStatus([FromQuery] string? tanggal)
         {
