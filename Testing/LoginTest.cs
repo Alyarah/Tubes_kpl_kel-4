@@ -51,7 +51,7 @@ namespace Tubes_kpl_kel_4.Tests
         {
             var login = new Login();
 
-            string hasil = login.LoginUser("Joko", "joko@example.com", "123");
+            string hasil = login.LoginUser("Joko", "joko@gmail.com", "123");
 
             Assert.AreEqual(StatusLogin.Gagal, login.Status);
             Assert.AreEqual("Login gagal. Inputan tidak valid.", hasil);
@@ -63,7 +63,7 @@ namespace Tubes_kpl_kel_4.Tests
 
             var login = new Login();
 
-            string hasil = login.LoginUser("Noname", "noname@example.com", "TidakAda123");
+            string hasil = login.LoginUser("Noname", "noname@gamil.com", "TidakAda123");
 
             Assert.AreEqual(StatusLogin.Gagal, login.Status);
             Assert.AreEqual("Login gagal. Data tidak ditemukan atau salah.", hasil);

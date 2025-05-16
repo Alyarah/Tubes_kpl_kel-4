@@ -21,7 +21,7 @@ namespace Tubes_kpl_kel_4.Tests
             var registrasi = new Registrasi<User>
             {
                 Nama = "Agus",
-                Email = "agus@example.com",
+                Email = "agus@gmail.com",
                 Password = "Agus12345"
             };
 
@@ -51,7 +51,7 @@ namespace Tubes_kpl_kel_4.Tests
             var user = new User
             {
                 Nama = "Dina",
-                Email = "dina@example.com",
+                Email = "dina@gmail.com",
                 Password = "DinaPass123"
             };
             UserStorage.TambahUser(user); // Simulasi user sudah ada
@@ -59,7 +59,7 @@ namespace Tubes_kpl_kel_4.Tests
             var registrasi = new Registrasi<User>
             {
                 Nama = "Dina",
-                Email = "dina@example.com",
+                Email = "dina@gmail.com",
                 Password = "DinaPass123"
             };
 
