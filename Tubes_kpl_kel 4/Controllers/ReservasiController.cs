@@ -20,7 +20,7 @@ namespace Tubes_kpl_kel_4.Controllers
         private static List<DataReservasi> _reservasiList = new();
 
         private static User _currentUser = new User { Nama = "Sheila" };
-        private StatusReservasi _statusReservasi;
+        private StatusReservasi _statusReservasi = new StatusReservasi();
 
 
         public class ReservasiRequest
