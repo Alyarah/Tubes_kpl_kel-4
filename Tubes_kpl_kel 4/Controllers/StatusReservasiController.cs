@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tubes_kpl_kel_4.Reservasi;
+using Tubes_kpl_kel_4.Models;
 
 namespace Tubes_kpl_kel_4.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/statusreservasi")]
     public class StatusReservasiController : ControllerBase
     {
         private readonly StatusReservasi _statusReservasi;
@@ -14,41 +15,35 @@ namespace Tubes_kpl_kel_4.Controllers
             _statusReservasi = new StatusReservasi();
         }
 
+       
         [HttpGet]
-        public IActionResult GetAllReservasi()
+        public ActionResult<List<DataReservasi>> GetStatusReservasi()
         {
+            if (_statusReservasi.DaftarReservasi == null || !_statusReservasi.DaftarReservasi.Any())
+            {
+                return NotFound("Tidak ada data reservasi ditemukannnnnnnnn.");
+            }
+
             return Ok(_statusReservasi.DaftarReservasi);
         }
 
-        [HttpGet("availability")]
-        public IActionResult GetAvailability([FromQuery] string tanggal, [FromQuery] string mulai, [FromQuery] string selesai)
+        
+        [HttpGet("filter")]
+        public ActionResult<List<DataReservasi>> GetFilteredStatus([FromQuery] string? tanggal)
         {
-            var semuaRuangan = new List<(string Tempat, string Ruangan)>
+            var list = _statusReservasi.DaftarReservasi;
+
+            if (!string.IsNullOrEmpty(tanggal))
             {
-                ("Gedung A", "R.01"), ("Gedung A", "R.02"), ("Gedung A", "R.03"),
-                ("Gedung A", "R.04"), ("Gedung A", "R.05"),
-                ("Gedung B", "R.01"), ("Gedung B", "R.02"), ("Gedung B", "R.03"),
-                ("Gedung B", "R.04"), ("Gedung B", "R.05"),
-                ("Lab", "01"), ("Lab", "02")
-            };
+                list = list.Where(r => r.jReservasi.Tanggal == tanggal).ToList();
+            }
 
-            var hasil = semuaRuangan.Select(ruangan =>
+            if (list == null || !list.Any())
             {
-                bool dipesan = _statusReservasi.DaftarReservasi.Any(r =>
-                    r.Tempat == ruangan.Tempat &&
-                    r.Ruangan == ruangan.Ruangan &&
-                    r.jReservasi.Tanggal == tanggal
-                );
+                return NotFound("Tidak ada data reservasi sesuai filter.");
+            }
 
-                return new
-                {
-                    ruangan.Tempat,
-                    ruangan.Ruangan,
-                    Status = dipesan ? "Sudah Dipesan" : "Tersedia"
-                };
-            });
-
-            return Ok(hasil);
+            return Ok(list);
         }
     }
 }

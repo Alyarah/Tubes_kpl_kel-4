@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using Tubes_kpl_kel_4;
 using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Reservasi;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Tubes_kpl_kel_4.Controllers
 {
@@ -11,32 +11,30 @@ namespace Tubes_kpl_kel_4.Controllers
     [Route("api/[controller]")]
     public class ReservasiController : ControllerBase
     {
-        private static DaftarKelas _daftarKelas = new DaftarKelas(
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json")
-        );
+        private readonly string _filePath;
+        private readonly DaftarKelas _daftarKelas;
+        private readonly StatusReservasi _statusReservasi;
 
-        private static List<Jadwal> _jadwalList = _daftarKelas.ListKelas;
-
-        private static List<DataReservasi> _reservasiList = new();
-
-        private static User _currentUser = new User { Nama = "Sheila" };
-        private StatusReservasi _statusReservasi = new StatusReservasi();
-
-
-        public class ReservasiRequest
+        public ReservasiController()
         {
-            public string Tempat { get; set; }
-            public string Ruangan { get; set; }
-            public int Kapasitas { get; set; }
-            public string Tanggal { get; set; }
-            public string JamMulai { get; set; }
-            public string JamSelesai { get; set; }
+            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
+            _daftarKelas = new DaftarKelas(_filePath);
+            _statusReservasi = new StatusReservasi();
+
         }
 
         [HttpPost]
-        public IActionResult PostReservasi([FromBody] ReservasiRequest request)
+        public IActionResult PostReservasi([FromBody] ReservasiModel request)
         {
-            var reservasiService = new ReservasiRuangan<User, Jadwal, DataReservasi>(_currentUser, _jadwalList, _reservasiList, _daftarKelas, _statusReservasi);
+            var user = new User { Nama = request.NamaUser };
+
+            var reservasiService = new ReservasiRuangan<User, Jadwal, DataReservasi>(
+                user,
+                _daftarKelas.ListKelas,
+                _statusReservasi.DaftarReservasi,
+                _daftarKelas,
+                _statusReservasi
+            );
 
             string hasil = reservasiService.LakukanReservasi(
                 request.Tempat,
@@ -47,14 +45,10 @@ namespace Tubes_kpl_kel_4.Controllers
                 request.JamSelesai
             );
 
-            if (hasil.StartsWith("Gagal"))
-            {
-                return BadRequest(new { message = hasil });
-            }
-
-            return Ok(new { message = hasil });
+            if (hasil.StartsWith("Suksesssss"))
+                return Ok(new { message = hasil });
+            else
+                return BadRequest(new { error = hasil });
         }
     }
 }
-
-

@@ -1,59 +1,67 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using Tubes_kpl_kel_4.Models;
-using Tubes_kpl_kel_4.Reservasi;
 
 namespace Tubes_kpl_kel_4.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PembatalanController : ControllerBase
+    public class PembatalanReservasiController : ControllerBase
     {
-        private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
+        private readonly string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
 
         [HttpDelete]
-        public IActionResult BatalkanReservasi(
-            [FromQuery] string tempat,
-            [FromQuery] string ruangan,
-            [FromQuery] string tanggal,
-            [FromQuery] string jamMulai,
-            [FromQuery] string alasan)
+        public IActionResult BatalkanReservasi([FromBody] RequestPembatalan dto)
         {
-            if (string.IsNullOrWhiteSpace(alasan))
-                return BadRequest("Alasan pembatalan diperlukan.");
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("File reservasi tidak ditemukan.");
 
-            if (!System.IO.File.Exists(_filePath))
-                return NotFound("Data reservasi tidak ditemukan.");
+            try
+            {
+                // Baca data dari file JSON
+                var jsonData = System.IO.File.ReadAllText(filePath);
+                var node = JsonNode.Parse(jsonData);
+                var reservasiArray = node?["Reservasi"];
+                var options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() }
+                };
 
-            var json = System.IO.File.ReadAllText(_filePath);
-            var rootNode = JsonDocument.Parse(json).RootElement;
-            var reservasiList = JsonSerializer.Deserialize<List<ReservasiItem>>(rootNode.GetProperty("Reservasi").ToString());
+                var dataList = reservasiArray?.Deserialize<List<DataReservasi>>(options) ?? new List<DataReservasi>();
 
-            var reservasi = reservasiList?
-            .FirstOrDefault(r =>
-                r.Tempat.Equals(tempat, StringComparison.OrdinalIgnoreCase) &&
-                r.Ruangan.Equals(ruangan, StringComparison.OrdinalIgnoreCase) &&
-                r.Jadwal != null &&
-                r.Jadwal.Tanggal == tanggal &&
-                r.Jadwal.Mulai == jamMulai &&
-                r.Status == "Aktif");
+                // Lakukan pembatalan
+                var pembatalan = new PembatalanReservasi(dataList);
+                bool sukses = pembatalan.Batalkan(dto.Tempat, dto.Ruangan, dto.Tanggal, dto.Mulai, dto.Alasan);
 
-            if (reservasi == null)
-                return NotFound("Reservasi tidak ditemukan atau sudah dibatalkan.");
+                if (!sukses)
+                    return BadRequest("Pembatalan gagal. Periksa data input.");
 
-            if (!Validators.Validasi.ValidasiPembatalan($"{tempat}-{ruangan}", alasan))
-                return BadRequest("Alasan pembatalan tidak valid.");
+                // Tulis ulang data ke file JSON
+                var newJson = new JsonObject
+                {
+                    ["Reservasi"] = JsonSerializer.SerializeToNode(dataList, options)
+                };
+                System.IO.File.WriteAllText(filePath, newJson.ToJsonString(options));
 
-            reservasi.Status = "Dibatalkan";
-            reservasi.AlasanPembatalan = alasan;
-
-            var kelasJson = JsonNode.Parse(json);
-            kelasJson["Reservasi"] = JsonSerializer.SerializeToNode(reservasiList);
-
-            System.IO.File.WriteAllText(_filePath, kelasJson.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
-
-            return Ok("Reservasi berhasil dibatalkan.");
+                return Ok("Reservasi berhasil dibatalkan.");
+            }
+            catch
+            {
+                return StatusCode(500, "Terjadi kesalahan saat memproses pembatalan.");
+            }
         }
+    }
+
+    public class RequestPembatalan
+    {
+        public string Tempat { get; set; }
+        public string Ruangan { get; set; }
+        public string Tanggal { get; set; } // Format: yyyy-MM-dd
+        public string Mulai { get; set; }   // Format: HH:mm
+        public string Alasan { get; set; }
     }
 }

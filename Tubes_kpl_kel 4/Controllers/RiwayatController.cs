@@ -1,47 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Reservasi;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Tubes_kpl_kel_4.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/riwayatreservasi")]
     public class RiwayatController : ControllerBase
     {
-        private static readonly List<RiwayatReservasiItem> _riwayat = new List<RiwayatReservasiItem>
-        {
-            new RiwayatReservasiItem
-            {
-                DetailJadwal = new Jadwal
-                {
-                    Tempat = "Gedung B", Ruangan = "R.204", Kapasitas = 35,
-                    Hari = "Rabu", Mulai = "13:00", Selesai = "15:00"
-                },
-                Tempat = "Gedung B",
-                Ruangan = "R.204",
-                Kapasitas = 35,
-                Status = "Berhasil",
-                AlasanPembatalan = null
-            },
-            new RiwayatReservasiItem
-            {
-                DetailJadwal = new Jadwal
-                {
-                    Tempat = "Gedung A", Ruangan = "R.101", Kapasitas = 40,
-                    Hari = "Selasa", Mulai = "10:00", Selesai = "12:00"
-                },
-                Tempat = "Gedung A",
-                Ruangan = "R.101",
-                Kapasitas = 40,
-                Status = "Dibatalkan",
-                AlasanPembatalan = "Bentrok dengan mata kuliah lain"
-            }
-        };
+        private readonly StatusReservasi _statusReservasi;
 
-        [HttpGet]
-        public ActionResult<IEnumerable<RiwayatReservasiItem>> GetRiwayatReservasi()
+        public RiwayatController()
         {
-            return Ok(_riwayat);
+            _statusReservasi = new StatusReservasi();
+        }
+
+        
+        [HttpGet]
+        public ActionResult<List<DataReservasi>> GetRiwayatReservasi([FromQuery] string namaUser)
+        {
+            if (string.IsNullOrWhiteSpace(namaUser))
+            {
+                return BadRequest("Nama user harus disertakan sebagai query string.");
+            }
+
+            var daftarReservasi = _statusReservasi.DaftarReservasi;
+            var riwayatUser = daftarReservasi
+                .Where(r => r.jReservasi.NamaUser.Equals(namaUser, System.StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (riwayatUser.Count == 0)
+            {
+                return NotFound("Riwayat reservasi tidak ditemukan untuk user tersebut.");
+            }
+
+            return Ok(riwayatUser);
         }
     }
 }

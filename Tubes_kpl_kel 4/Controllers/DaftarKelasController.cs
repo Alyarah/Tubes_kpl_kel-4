@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Tubes_kpl_kel_4.Reservasi;
+using Tubes_kpl_kel_4.Models;
+using System.IO;
+using System;
+using System.Collections.Generic;
 
 namespace Tubes_kpl_kel_4.Controllers
 {
@@ -11,7 +14,9 @@ namespace Tubes_kpl_kel_4.Controllers
 
         public DaftarKelasController()
         {
-            _daftarKelas = new DaftarKelas("config.json");
+            
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
+            _daftarKelas = new DaftarKelas(filePath);
         }
 
         [HttpGet]
