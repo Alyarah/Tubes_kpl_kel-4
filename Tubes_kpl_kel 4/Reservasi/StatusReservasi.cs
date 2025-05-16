@@ -97,14 +97,21 @@ namespace Tubes_kpl_kel_4.Reservasi
         {
             Console.WriteLine("=== Daftar Kelas ===");
             var filteredKelas = DaftarReservasi;
+            var filters = new List<Func<DataReservasi, bool>>();
+
             if (!string.IsNullOrEmpty(hariFilter))
             {
-                filteredKelas = filteredKelas.Where(r => r.jReservasi.Tanggal.Contains(hariFilter)).ToList();
+                filters.Add(data => data.jReservasi.Tanggal.Contains(hariFilter));
             }
 
             if (kapasitasFilter > 0)
             {
-                filteredKelas = filteredKelas.Where(r => r.Kapasitas >= kapasitasFilter).ToList();
+                filters.Add(data => data.Kapasitas >= kapasitasFilter);
+            }
+
+            foreach (var filter in filters)
+            {
+                filteredKelas = filteredKelas.Where(filter).ToList();
             }
 
             if (filteredKelas.Count == 0)
