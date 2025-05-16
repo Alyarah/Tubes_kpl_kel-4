@@ -36,7 +36,7 @@ namespace Tubes_kpl_kel_4.Controllers
         [HttpPost]
         public IActionResult PostReservasi([FromBody] ReservasiRequest request)
         {
-            var reservasiService = new ReservasiRuangan(_currentUser, _jadwalList, _reservasiList, _daftarKelas, _statusReservasi);
+            var reservasiService = new ReservasiRuangan<User, Jadwal, DataReservasi>(_currentUser, _jadwalList, _reservasiList, _daftarKelas, _statusReservasi);
 
             string hasil = reservasiService.LakukanReservasi(
                 request.Tempat,

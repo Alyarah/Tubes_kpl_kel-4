@@ -32,7 +32,7 @@ namespace Tubes_kpl_kel_4.Tests
             var daftarKelas = new DaftarKelas(configPath);
             var statusReservasi = new StatusReservasi();
 
-            var reservasiRuangan = new ReservasiRuangan(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
+            var reservasiRuangan = new ReservasiRuangan<User, Jadwal, DataReservasi>(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
             string hasil = reservasiRuangan.LakukanReservasi("Gedung A", "101", 20, "2025-05-19", "10:00", "12:00");
 
             Assert.IsTrue(hasil.StartsWith("Sukses"), "Reservasi seharusnya berhasil.");
@@ -59,7 +59,7 @@ namespace Tubes_kpl_kel_4.Tests
             var daftarKelas = new DaftarKelas(configPath);
             var statusReservasi = new StatusReservasi();
 
-            var reservasiRuangan = new ReservasiRuangan(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
+            var reservasiRuangan = new ReservasiRuangan<User, Jadwal, DataReservasi>(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
             string hasil = reservasiRuangan.LakukanReservasi("Gedung A", "101", 20, "2025-05-19", "09:00", "11:00");
 
             Assert.IsTrue(hasil.StartsWith("Gagal: Jadwal tetap"), "Reservasi seharusnya gagal karena bentrok jadwal tetap.");
@@ -91,7 +91,7 @@ namespace Tubes_kpl_kel_4.Tests
             var daftarKelas = new DaftarKelas(configPath);
             var statusReservasi = new StatusReservasi();
 
-            var reservasiRuangan = new ReservasiRuangan(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
+            var reservasiRuangan = new ReservasiRuangan<User, Jadwal, DataReservasi>(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
             string hasil = reservasiRuangan.LakukanReservasi("Gedung A", "101", 20, "2025-05-19", "11:00", "13:00");
 
             Assert.IsTrue(hasil.StartsWith("Gagal: Sudah dipesan"), "Reservasi seharusnya gagal karena bentrok dengan reservasi sebelumnya.");

@@ -63,7 +63,7 @@ namespace Tubes_kpl_kel_4
                             var listReservasi = new List<DataReservasi>();
                             var statusReservasi = new StatusReservasi();
 
-        var reservasiRuangan = new ReservasiRuangan(currentUser, listJadwal, listReservasi, daftarKelas, statusReservasi);
+        var reservasiRuangan = new ReservasiRuangan<User, Jadwal, DataReservasi>(currentUser, listJadwal, listReservasi, daftarKelas, statusReservasi);
 
                             bool logout = false;
                             while (!logout)
