@@ -50,94 +50,105 @@
             // 
             lbl_reservasi.AutoSize = true;
             lbl_reservasi.Font = new Font("Segoe UI", 15F);
-            lbl_reservasi.Location = new Point(329, 24);
+            lbl_reservasi.Location = new Point(411, 30);
+            lbl_reservasi.Margin = new Padding(4, 0, 4, 0);
             lbl_reservasi.Name = "lbl_reservasi";
-            lbl_reservasi.Size = new Size(117, 35);
+            lbl_reservasi.Size = new Size(139, 41);
             lbl_reservasi.TabIndex = 0;
             lbl_reservasi.Text = "Reservasi";
             // 
             // label_tempat
             // 
             label_tempat.AutoSize = true;
-            label_tempat.Location = new Point(60, 77);
+            label_tempat.Location = new Point(75, 96);
+            label_tempat.Margin = new Padding(4, 0, 4, 0);
             label_tempat.Name = "label_tempat";
-            label_tempat.Size = new Size(59, 20);
+            label_tempat.Size = new Size(70, 25);
             label_tempat.TabIndex = 1;
             label_tempat.Text = "Tempat";
             label_tempat.Click += label_tempat_Click;
             // 
             // tempat
             // 
-            tempat.Location = new Point(60, 105);
+            tempat.Location = new Point(75, 131);
+            tempat.Margin = new Padding(4, 4, 4, 4);
             tempat.Name = "tempat";
-            tempat.Size = new Size(703, 27);
+            tempat.Size = new Size(878, 31);
             tempat.TabIndex = 2;
             tempat.TextChanged += tempat_TextChanged;
             // 
             // textBox_ruangan
             // 
-            textBox_ruangan.Location = new Point(60, 168);
+            textBox_ruangan.Location = new Point(75, 210);
+            textBox_ruangan.Margin = new Padding(4, 4, 4, 4);
             textBox_ruangan.Name = "textBox_ruangan";
-            textBox_ruangan.Size = new Size(703, 27);
+            textBox_ruangan.Size = new Size(878, 31);
             textBox_ruangan.TabIndex = 4;
             // 
             // label_ruangan
             // 
             label_ruangan.AutoSize = true;
-            label_ruangan.Location = new Point(60, 139);
+            label_ruangan.Location = new Point(75, 174);
+            label_ruangan.Margin = new Padding(4, 0, 4, 0);
             label_ruangan.Name = "label_ruangan";
-            label_ruangan.Size = new Size(67, 20);
+            label_ruangan.Size = new Size(82, 25);
             label_ruangan.TabIndex = 3;
             label_ruangan.Text = "Ruangan";
             // 
             // textBoxt_tanggal
             // 
-            textBoxt_tanggal.Location = new Point(60, 296);
+            textBoxt_tanggal.Location = new Point(75, 370);
+            textBoxt_tanggal.Margin = new Padding(4, 4, 4, 4);
             textBoxt_tanggal.Name = "textBoxt_tanggal";
-            textBoxt_tanggal.Size = new Size(703, 27);
+            textBoxt_tanggal.Size = new Size(878, 31);
             textBoxt_tanggal.TabIndex = 6;
             textBoxt_tanggal.TextChanged += textBoxt_tanggal_TextChanged;
             // 
             // label_tanggal
             // 
             label_tanggal.AutoSize = true;
-            label_tanggal.Location = new Point(58, 263);
+            label_tanggal.Location = new Point(72, 329);
+            label_tanggal.Margin = new Padding(4, 0, 4, 0);
             label_tanggal.Name = "label_tanggal";
-            label_tanggal.Size = new Size(61, 20);
+            label_tanggal.Size = new Size(192, 25);
             label_tanggal.TabIndex = 5;
-            label_tanggal.Text = "Tanggal";
+            label_tanggal.Text = "Tanggal (yyyy-mm-dd)";
             // 
             // textBox_mulai
             // 
-            textBox_mulai.Location = new Point(160, 342);
+            textBox_mulai.Location = new Point(200, 428);
+            textBox_mulai.Margin = new Padding(4, 4, 4, 4);
             textBox_mulai.Name = "textBox_mulai";
-            textBox_mulai.Size = new Size(177, 27);
+            textBox_mulai.Size = new Size(220, 31);
             textBox_mulai.TabIndex = 8;
             textBox_mulai.TextChanged += textBox_mulai_TextChanged;
             // 
             // label_jam
             // 
             label_jam.AutoSize = true;
-            label_jam.Location = new Point(591, 18);
+            label_jam.Location = new Point(739, 22);
+            label_jam.Margin = new Padding(4, 0, 4, 0);
             label_jam.Name = "label_jam";
-            label_jam.Size = new Size(0, 20);
+            label_jam.Size = new Size(0, 25);
             label_jam.TabIndex = 7;
             label_jam.Click += label_jam_Click;
             // 
             // textBox_selesai
             // 
-            textBox_selesai.Location = new Point(525, 343);
+            textBox_selesai.Location = new Point(656, 429);
+            textBox_selesai.Margin = new Padding(4, 4, 4, 4);
             textBox_selesai.Name = "textBox_selesai";
-            textBox_selesai.Size = new Size(186, 27);
+            textBox_selesai.Size = new Size(232, 31);
             textBox_selesai.TabIndex = 10;
             textBox_selesai.TextChanged += textBox_selesai_TextChanged;
             // 
             // label_selesai
             // 
             label_selesai.AutoSize = true;
-            label_selesai.Location = new Point(436, 347);
+            label_selesai.Location = new Point(545, 434);
+            label_selesai.Margin = new Padding(4, 0, 4, 0);
             label_selesai.Name = "label_selesai";
-            label_selesai.Size = new Size(83, 20);
+            label_selesai.Size = new Size(99, 25);
             label_selesai.TabIndex = 9;
             label_selesai.Text = "Jam selesai";
             label_selesai.Click += label_selesai_Click;
@@ -145,33 +156,37 @@
             // label_mulai
             // 
             label_mulai.AutoSize = true;
-            label_mulai.Location = new Point(58, 346);
+            label_mulai.Location = new Point(72, 432);
+            label_mulai.Margin = new Padding(4, 0, 4, 0);
             label_mulai.Name = "label_mulai";
-            label_mulai.Size = new Size(76, 20);
+            label_mulai.Size = new Size(91, 25);
             label_mulai.TabIndex = 11;
             label_mulai.Text = "Jam mulai";
             // 
             // textBox_kapasitas
             // 
-            textBox_kapasitas.Location = new Point(60, 230);
+            textBox_kapasitas.Location = new Point(75, 288);
+            textBox_kapasitas.Margin = new Padding(4, 4, 4, 4);
             textBox_kapasitas.Name = "textBox_kapasitas";
-            textBox_kapasitas.Size = new Size(703, 27);
+            textBox_kapasitas.Size = new Size(878, 31);
             textBox_kapasitas.TabIndex = 13;
             // 
             // label_kapasitas
             // 
             label_kapasitas.AutoSize = true;
-            label_kapasitas.Location = new Point(60, 201);
+            label_kapasitas.Location = new Point(75, 251);
+            label_kapasitas.Margin = new Padding(4, 0, 4, 0);
             label_kapasitas.Name = "label_kapasitas";
-            label_kapasitas.Size = new Size(72, 20);
+            label_kapasitas.Size = new Size(86, 25);
             label_kapasitas.TabIndex = 12;
             label_kapasitas.Text = "Kapasitas";
             // 
             // buttonS
             // 
-            buttonS.Location = new Point(337, 397);
+            buttonS.Location = new Point(421, 496);
+            buttonS.Margin = new Padding(4, 4, 4, 4);
             buttonS.Name = "buttonS";
-            buttonS.Size = new Size(94, 29);
+            buttonS.Size = new Size(118, 36);
             buttonS.TabIndex = 14;
             buttonS.Text = "Submit";
             buttonS.UseVisualStyleBackColor = true;
@@ -179,9 +194,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(24, 21);
+            button2.Location = new Point(30, 26);
+            button2.Margin = new Padding(4, 4, 4, 4);
             button2.Name = "button2";
-            button2.Size = new Size(57, 25);
+            button2.Size = new Size(71, 31);
             button2.TabIndex = 15;
             button2.Text = "Back";
             button2.UseVisualStyleBackColor = true;
@@ -189,9 +205,9 @@
             // 
             // reservasi
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1000, 562);
             Controls.Add(button2);
             Controls.Add(buttonS);
             Controls.Add(textBox_kapasitas);
@@ -208,6 +224,7 @@
             Controls.Add(tempat);
             Controls.Add(label_tempat);
             Controls.Add(lbl_reservasi);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "reservasi";
             Text = "reservasi";
             Load += reservasi_Load;

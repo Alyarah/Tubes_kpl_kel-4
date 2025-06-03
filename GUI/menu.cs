@@ -59,7 +59,9 @@ namespace GUI
 
         private void button_status_Click(object sender, EventArgs e)
         {
-
+            status statusForm = new status();
+            statusForm.Show();
+            this.Hide();
         }
 
         private void button_reservasi_Click(object sender, EventArgs e)
