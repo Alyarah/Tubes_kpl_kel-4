@@ -3,19 +3,25 @@ using Tubes_kpl_kel_4;
 using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Reservasi;
 
+// Kelas generic untuk melakukan reservasi ruangan
 public class ReservasiRuangan<TUser, TJadwal, TReservasi>
     where TUser : User
     where TJadwal : Jadwal
     where TReservasi : DataReservasi, new()
-
 {
-    private TUser _user;
-    private List<TJadwal> _jadwalList;
-    private List<TReservasi> _reservasiList;
-    private DaftarKelas _daftarKelas;
-    private StatusReservasi _statusReservasi;
+    private TUser _user;                            // Pengguna yang melakukan reservasi
+    private List<TJadwal> _jadwalList;              // Daftar jadwal tetap yang sudah ada
+    private List<TReservasi> _reservasiList;        // Daftar reservasi yang sudah dilakukan
+    private DaftarKelas _daftarKelas;               // Data daftar kelas dari file
+    private StatusReservasi _statusReservasi;       // Objek untuk menyimpan dan memproses status reservasi
 
-    public ReservasiRuangan(TUser user, List<TJadwal> jadwalList, List<TReservasi> reservasiList, DaftarKelas daftarKelas, StatusReservasi statusReservasi)
+    // Konstruktor untuk mengisi properti saat pembuatan objek
+    public ReservasiRuangan(
+        TUser user,
+        List<TJadwal> jadwalList,
+        List<TReservasi> reservasiList,
+        DaftarKelas daftarKelas,
+        StatusReservasi statusReservasi)
     {
         _user = user;
         _jadwalList = jadwalList;
@@ -24,13 +30,18 @@ public class ReservasiRuangan<TUser, TJadwal, TReservasi>
         _statusReservasi = statusReservasi;
     }
 
+    // Method utama untuk melakukan reservasi
     public string LakukanReservasi(string tempat, string ruangan, int kapasitas, string tanggal, string jamMulai, string jamSelesai)
     {
         try
         {
+            // Ubah string tanggal menjadi format DateTime
             DateTime tanggalReservasi = DateTime.Parse(tanggal);
+
+            // Ambil nama hari dalam Bahasa Indonesia (Senin, Selasa, dst.)
             string hariDariTanggal = tanggalReservasi.ToString("dddd", new CultureInfo("id-ID"));
 
+            // Cek apakah jadwal tetap bentrok
             foreach (var jadwal in _jadwalList)
             {
                 if (jadwal.Tempat == tempat && jadwal.Ruangan == ruangan && jadwal.Hari.Equals(hariDariTanggal, StringComparison.OrdinalIgnoreCase))
@@ -42,6 +53,7 @@ public class ReservasiRuangan<TUser, TJadwal, TReservasi>
                 }
             }
 
+            // Cek apakah sudah ada reservasi di waktu yang sama
             foreach (var reservasi in _reservasiList)
             {
                 if (reservasi.Tempat == tempat && reservasi.Ruangan == ruangan && reservasi.jReservasi.Tanggal == tanggal)
@@ -53,6 +65,7 @@ public class ReservasiRuangan<TUser, TJadwal, TReservasi>
                 }
             }
 
+            // Buat objek jadwal reservasi baru
             JadwalReservasi jadwalReservasiBaru = new JadwalReservasi
             {
                 NamaUser = _user.Nama,
@@ -61,6 +74,7 @@ public class ReservasiRuangan<TUser, TJadwal, TReservasi>
                 Selesai = jamSelesai
             };
 
+            // Buat data reservasi baru
             TReservasi dataBaru = new TReservasi
             {
                 Tempat = tempat,
@@ -71,6 +85,7 @@ public class ReservasiRuangan<TUser, TJadwal, TReservasi>
                 AlasanPembatalan = ""
             };
 
+            // Simpan data reservasi ke list dan file
             _reservasiList.Add(dataBaru);
             _statusReservasi.DaftarReservasi.Add(dataBaru);
             _statusReservasi.SimpanReservasiKeFile();

@@ -11,6 +11,7 @@ namespace Tubes_kpl_kel_4.Auth
 
         public string Register()
         {
+            // Validasi input
             bool validNama = Validasi.ValidasiNama(Nama);
             bool validEmail = Validasi.ValidasiEmail(Email);
             bool validPassword = Validasi.ValidasiPassword(Password);
@@ -20,11 +21,13 @@ namespace Tubes_kpl_kel_4.Auth
                 return "Registrasi gagal. Inputan tidak valid.";
             }
 
+            // Cek apakah user sudah terdaftar
             if (UserStorage.CekUserSudahAda(Nama, Email))
             {
                 return "Registrasi gagal. User dengan nama dan email ini sudah terdaftar.";
             }
 
+            // Tambah user baru
             var user = new TUser
             {
                 Nama = Nama,
@@ -33,6 +36,7 @@ namespace Tubes_kpl_kel_4.Auth
             };
 
             UserStorage.TambahUser(user);
+
             return $"Registrasi berhasil untuk: {Nama}";
         }
     }
