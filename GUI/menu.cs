@@ -44,7 +44,9 @@ namespace GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            reservasi reservasiForm = new reservasi();
+            reservasiForm.Show();
+            this.Hide();
         }
 
         private void button_batalkan_Click(object sender, EventArgs e)
@@ -58,6 +60,11 @@ namespace GUI
         }
 
         private void button_reservasi_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void menu_Load(object sender, EventArgs e)
         {
 
         }

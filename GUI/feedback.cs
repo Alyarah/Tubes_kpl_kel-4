@@ -56,5 +56,10 @@ namespace GUI
             menuUtama.Show();
             this.Hide();
         }
+
+        private void feedback_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

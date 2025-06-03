@@ -40,9 +40,10 @@
             // 
             // button_logout
             // 
-            button_logout.Location = new Point(602, 12);
+            button_logout.Location = new Point(482, 10);
+            button_logout.Margin = new Padding(2, 2, 2, 2);
             button_logout.Name = "button_logout";
-            button_logout.Size = new Size(186, 41);
+            button_logout.Size = new Size(149, 33);
             button_logout.TabIndex = 0;
             button_logout.Text = "Log Out";
             button_logout.UseVisualStyleBackColor = true;
@@ -52,18 +53,20 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 25F);
-            label1.Location = new Point(25, 26);
+            label1.Location = new Point(20, 21);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(314, 67);
+            label1.Size = new Size(266, 57);
             label1.TabIndex = 1;
             label1.Text = "Menu Utama";
             label1.Click += label1_Click;
             // 
             // button_daftarKelas
             // 
-            button_daftarKelas.Location = new Point(39, 123);
+            button_daftarKelas.Location = new Point(31, 98);
+            button_daftarKelas.Margin = new Padding(2, 2, 2, 2);
             button_daftarKelas.Name = "button_daftarKelas";
-            button_daftarKelas.Size = new Size(728, 34);
+            button_daftarKelas.Size = new Size(582, 27);
             button_daftarKelas.TabIndex = 2;
             button_daftarKelas.Text = "Lihat Daftar Kelas";
             button_daftarKelas.UseVisualStyleBackColor = true;
@@ -71,9 +74,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(39, 175);
+            button2.Location = new Point(31, 140);
+            button2.Margin = new Padding(2, 2, 2, 2);
             button2.Name = "button2";
-            button2.Size = new Size(728, 34);
+            button2.Size = new Size(582, 27);
             button2.TabIndex = 3;
             button2.Text = "Reservasi Kelas";
             button2.UseVisualStyleBackColor = true;
@@ -81,9 +85,10 @@
             // 
             // button_batalkan
             // 
-            button_batalkan.Location = new Point(39, 225);
+            button_batalkan.Location = new Point(31, 180);
+            button_batalkan.Margin = new Padding(2, 2, 2, 2);
             button_batalkan.Name = "button_batalkan";
-            button_batalkan.Size = new Size(728, 34);
+            button_batalkan.Size = new Size(582, 27);
             button_batalkan.TabIndex = 4;
             button_batalkan.Text = "Batalkan Reservasi";
             button_batalkan.UseVisualStyleBackColor = true;
@@ -91,9 +96,10 @@
             // 
             // button_status
             // 
-            button_status.Location = new Point(39, 281);
+            button_status.Location = new Point(31, 225);
+            button_status.Margin = new Padding(2, 2, 2, 2);
             button_status.Name = "button_status";
-            button_status.Size = new Size(728, 34);
+            button_status.Size = new Size(582, 27);
             button_status.TabIndex = 5;
             button_status.Text = "Status Reservasi";
             button_status.UseVisualStyleBackColor = true;
@@ -101,9 +107,10 @@
             // 
             // button_reservasi
             // 
-            button_reservasi.Location = new Point(39, 330);
+            button_reservasi.Location = new Point(31, 264);
+            button_reservasi.Margin = new Padding(2, 2, 2, 2);
             button_reservasi.Name = "button_reservasi";
-            button_reservasi.Size = new Size(728, 34);
+            button_reservasi.Size = new Size(582, 27);
             button_reservasi.TabIndex = 6;
             button_reservasi.Text = "Riwayat Reservasi";
             button_reservasi.UseVisualStyleBackColor = true;
@@ -111,9 +118,10 @@
             // 
             // button_feedback
             // 
-            button_feedback.Location = new Point(39, 382);
+            button_feedback.Location = new Point(31, 306);
+            button_feedback.Margin = new Padding(2, 2, 2, 2);
             button_feedback.Name = "button_feedback";
-            button_feedback.Size = new Size(728, 34);
+            button_feedback.Size = new Size(582, 27);
             button_feedback.TabIndex = 7;
             button_feedback.Text = "Feedback";
             button_feedback.UseVisualStyleBackColor = true;
@@ -121,9 +129,9 @@
             // 
             // menu
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(640, 360);
             Controls.Add(button_feedback);
             Controls.Add(button_reservasi);
             Controls.Add(button_status);
@@ -132,8 +140,10 @@
             Controls.Add(button_daftarKelas);
             Controls.Add(label1);
             Controls.Add(button_logout);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "menu";
             Text = "menu";
+            Load += menu_Load;
             ResumeLayout(false);
             PerformLayout();
         }

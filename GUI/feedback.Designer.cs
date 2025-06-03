@@ -39,9 +39,10 @@
             // 
             label_feedback.AutoSize = true;
             label_feedback.Font = new Font("Segoe UI", 30F);
-            label_feedback.Location = new Point(246, 67);
+            label_feedback.Location = new Point(197, 54);
+            label_feedback.Margin = new Padding(2, 0, 2, 0);
             label_feedback.Name = "label_feedback";
-            label_feedback.Size = new Size(285, 81);
+            label_feedback.Size = new Size(236, 67);
             label_feedback.TabIndex = 0;
             label_feedback.Text = "Feedback";
             label_feedback.Click += label_feedback_Click;
@@ -49,26 +50,29 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(47, 185);
+            label1.Location = new Point(38, 148);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(216, 25);
+            label1.Size = new Size(178, 20);
             label1.TabIndex = 1;
             label1.Text = "Masukkan Feedback anda";
             label1.Click += label1_Click_1;
             // 
             // textBox_feedback
             // 
-            textBox_feedback.Location = new Point(47, 236);
+            textBox_feedback.Location = new Point(38, 189);
+            textBox_feedback.Margin = new Padding(2, 2, 2, 2);
             textBox_feedback.Name = "textBox_feedback";
-            textBox_feedback.Size = new Size(700, 31);
+            textBox_feedback.Size = new Size(561, 27);
             textBox_feedback.TabIndex = 2;
             textBox_feedback.TextChanged += textBox_feedback_TextChanged;
             // 
             // button_submit
             // 
-            button_submit.Location = new Point(309, 331);
+            button_submit.Location = new Point(247, 265);
+            button_submit.Margin = new Padding(2, 2, 2, 2);
             button_submit.Name = "button_submit";
-            button_submit.Size = new Size(144, 44);
+            button_submit.Size = new Size(115, 35);
             button_submit.TabIndex = 3;
             button_submit.Text = "Submit";
             button_submit.UseVisualStyleBackColor = true;
@@ -76,9 +80,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(27, 26);
+            button1.Location = new Point(22, 21);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(60, 35);
+            button1.Size = new Size(48, 28);
             button1.TabIndex = 4;
             button1.Text = "back";
             button1.UseVisualStyleBackColor = true;
@@ -86,16 +91,18 @@
             // 
             // feedback
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(640, 360);
             Controls.Add(button1);
             Controls.Add(button_submit);
             Controls.Add(textBox_feedback);
             Controls.Add(label1);
             Controls.Add(label_feedback);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "feedback";
             Text = "feedback";
+            Load += feedback_Load;
             ResumeLayout(false);
             PerformLayout();
         }

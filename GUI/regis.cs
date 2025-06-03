@@ -79,5 +79,10 @@ namespace GUI
                 this.Hide();
             }
         }
+
+        private void regis_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
