@@ -14,7 +14,7 @@ namespace Tubes_kpl_kel_4.Controllers
 
         public DaftarKelasController()
         {
-            
+
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
             _daftarKelas = new DaftarKelas(filePath);
         }

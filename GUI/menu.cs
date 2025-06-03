@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4.Auth;
+using Tubes_kpl_kel_4.Models;
 
 namespace GUI
 {
@@ -51,7 +52,9 @@ namespace GUI
 
         private void button_batalkan_Click(object sender, EventArgs e)
         {
-
+            batalkan batalkanForm = new batalkan();
+            batalkanForm.Show();
+            this.Hide();
         }
 
         private void button_status_Click(object sender, EventArgs e)
