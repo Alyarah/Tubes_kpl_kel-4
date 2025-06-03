@@ -117,7 +117,7 @@
             button_feedback.TabIndex = 7;
             button_feedback.Text = "Feedback";
             button_feedback.UseVisualStyleBackColor = true;
-            button_feedback.Click += button6_Click;
+            button_feedback.Click += button_feedback_Click;
             // 
             // menu
             // 

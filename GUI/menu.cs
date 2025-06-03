@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tubes_kpl_kel_4.Auth;
 
 namespace GUI
 {
@@ -29,9 +30,11 @@ namespace GUI
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button_feedback_Click(object sender, EventArgs e)
         {
-
+            feedback feedbackForm = new feedback();
+            feedbackForm.Show();
+            this.Hide();
         }
 
         private void button_daftarKelas_Click(object sender, EventArgs e)
