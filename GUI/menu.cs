@@ -75,7 +75,9 @@ namespace GUI
 
         private void button_reservasi_Click(object sender, EventArgs e)
         {
-            
+            Riwayat riwayat = new Riwayat();
+            riwayat.Show();
+            this.Hide();
         }
 
         private void menu_Load(object sender, EventArgs e)
