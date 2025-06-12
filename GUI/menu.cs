@@ -40,7 +40,16 @@ namespace GUI
 
         private void button_daftarKelas_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                var daftarKelasForm = new LihatDaftarKelas();
+                daftarKelasForm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan saat membuka form Daftar Kelas: " + ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
