@@ -28,15 +28,29 @@ namespace GUI
         {
             //Mengakses lokasi json dan inisialisasi
             string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
-            DaftarKelas daftar = new DaftarKelas(configPath);
-
-            //Menampilkan isi json ke list Box
-            listBox1.Items.Clear();
-            foreach (var jadwal in daftar.ListKelas)
+            
+            if (!File.Exists(configPath))
             {
-                string tampil = $"{jadwal.Hari} | {jadwal.Tempat} - {jadwal.Ruangan} | " +
-                                $"Kapasitas: {jadwal.Kapasitas} | {jadwal.Mulai} - {jadwal.Selesai}";
-                listBox1.Items.Add(tampil);
+                MessageBox.Show("File daftar kelas tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                DaftarKelas daftar = new DaftarKelas(configPath);
+                
+                //Menampilkan isi json ke list Box
+                listBoxDaftarKelas.Items.Clear();
+                foreach (var jadwal in daftar.ListKelas)
+                {
+                    string tampil = $"{jadwal.Hari} | {jadwal.Tempat} - {jadwal.Ruangan} | " +
+                                    $"Kapasitas: {jadwal.Kapasitas} | {jadwal.Mulai} - {jadwal.Selesai}";
+                    listBoxDaftarKelas.Items.Add(tampil);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data kelas.\n" + ex.Message, "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -64,7 +78,7 @@ namespace GUI
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBoxDaftarKelas_SelectedIndexChanged(object sender, EventArgs e)
         {
             
         }

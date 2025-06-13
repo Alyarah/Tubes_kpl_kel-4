@@ -31,7 +31,7 @@
             label1 = new Label();
             buttonBack = new Button();
             label2 = new Label();
-            listBox1 = new ListBox();
+            listBoxDaftarKelas = new ListBox();
             SuspendLayout();
             // 
             // label1
@@ -65,21 +65,21 @@
             label2.Text = "Daftar Kelas Tersedia";
             label2.Click += label2_Click;
             // 
-            // listBox1
+            // listBoxDaftarKelas
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(40, 161);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(538, 244);
-            listBox1.TabIndex = 3;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            listBoxDaftarKelas.FormattingEnabled = true;
+            listBoxDaftarKelas.Location = new Point(40, 161);
+            listBoxDaftarKelas.Name = "listBoxDaftarKelas";
+            listBoxDaftarKelas.Size = new Size(538, 244);
+            listBoxDaftarKelas.TabIndex = 3;
+            listBoxDaftarKelas.SelectedIndexChanged += listBoxDaftarKelas_SelectedIndexChanged;
             // 
             // LihatDaftarKelas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(listBox1);
+            Controls.Add(listBoxDaftarKelas);
             Controls.Add(label2);
             Controls.Add(buttonBack);
             Controls.Add(label1);
@@ -95,6 +95,6 @@
         private Label label1;
         private Button buttonBack;
         private Label label2;
-        private ListBox listBox1;
+        private ListBox listBoxDaftarKelas;
     }
 }
