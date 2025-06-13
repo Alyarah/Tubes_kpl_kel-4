@@ -9,19 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4;
 using Tubes_kpl_kel_4.Reservasi;
+using Tubes_kpl_kel_4.Models;
 
 namespace GUI
 {
     public partial class Riwayat : Form
     {
-        private string _namaUser; // Nama user yang sedang login
+        private User _namaUser; // Nama user yang sedang login
         private StatusReservasi _statusReservasi;
-        private string? namaUser;
 
-        public Riwayat()
+        public Riwayat(User NamaUser)
         {
             InitializeComponent();
-            _namaUser = namaUser;
+            if (NamaUser == null)
+            {
+                MessageBox.Show("ERROR: User masih null saat masuk ke form Riwayat");
+                return;
+            }
+            _namaUser = NamaUser;
             _statusReservasi = new StatusReservasi();
             TampilkanRiwayat(); // Panggil saat form dibuat
         }
@@ -29,7 +34,7 @@ namespace GUI
         private void TampilkanRiwayat()
         {
             var riwayatUser = _statusReservasi.DaftarReservasi
-                .Where(r => r.jReservasi.NamaUser.Equals(_namaUser, StringComparison.OrdinalIgnoreCase)) 
+                .Where(r => r.jReservasi.NamaUser.Equals(_namaUser.Nama, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             listBox1.Items.Clear();
@@ -71,9 +76,14 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            halUtama home = new halUtama();
+            menu home = new menu(_namaUser);
             home.Show();
             this.Hide();
+        }
+
+        private void Riwayat_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

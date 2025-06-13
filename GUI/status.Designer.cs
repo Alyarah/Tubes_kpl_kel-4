@@ -74,6 +74,7 @@
             Controls.Add(label1);
             Name = "status";
             Text = "status";
+            Load += status_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4.Reservasi;
+using Tubes_kpl_kel_4.Models;
 
 namespace GUI
 {
     public partial class status : Form
     {
+        private User _user;
         private StatusReservasi statusReservasi;
-        public status()
+        public status(User user)
         {
             InitializeComponent();
+            _user = user;
             LoadData();
         }
 
@@ -46,9 +49,14 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            menu menuUtama = new menu();
+            menu menuUtama = new menu(_user);
             menuUtama.Show();
             this.Hide();
+        }
+
+        private void status_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

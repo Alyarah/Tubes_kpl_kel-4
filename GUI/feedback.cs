@@ -8,14 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4.Feedback;
+using Tubes_kpl_kel_4.Models;
 
 namespace GUI
 {
     public partial class feedback : Form
     {
-        public feedback()
+
+        private User _user;
+
+        public feedback(User user)
         {
             InitializeComponent();
+            _user = user;
         }
 
         private void label_feedback_Click(object sender, EventArgs e)
@@ -52,7 +57,7 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            menu menuUtama = new menu();
+            menu menuUtama = new menu(_user);
             menuUtama.Show();
             this.Hide();
         }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4.Auth;
+using Tubes_kpl_kel_4.Models;
 
 
 namespace GUI
@@ -63,7 +64,9 @@ namespace GUI
 
             if (hasilLogin.StartsWith("Login berhasil"))
             {
-                menu menuUtama = new menu();
+                User userLogin = loginAuth.Pengguna;
+
+                menu menuUtama = new menu(userLogin);
                 menuUtama.Show();
                 this.Hide();
             }

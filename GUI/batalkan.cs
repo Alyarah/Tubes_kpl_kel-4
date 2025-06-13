@@ -17,10 +17,13 @@ namespace GUI
     {
         private List<DataReservasi> daftarReservasi;
 
-        public batalkan()
+        private User _user;
+
+        public batalkan(User user, List<DataReservasi> data)
         {
             InitializeComponent();
-
+            _user = user;
+            daftarReservasi = data ?? new List<DataReservasi>();
         }
 
         public void SetData(List<DataReservasi> data)
@@ -111,19 +114,29 @@ namespace GUI
             if (sukses)
             {
                 MessageBox.Show("Reservasi berhasil dibatalkan.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close(); // Tutup form
             }
             else
             {
                 MessageBox.Show("Reservasi tidak ditemukan atau gagal dibatalkan.", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            menu menuUtama = new menu();
+            menu menuUtama = new menu(_user);
             menuUtama.Show();
             this.Hide();
+        }
+
+        private void batalkan_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

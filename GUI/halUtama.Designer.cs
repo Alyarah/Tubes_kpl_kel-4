@@ -86,6 +86,7 @@
             Controls.Add(label_namaApp);
             Name = "halUtama";
             Text = "Form1";
+            Load += halUtama_Load;
             ResumeLayout(false);
             PerformLayout();
         }

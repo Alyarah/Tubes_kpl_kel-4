@@ -9,15 +9,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4;
+using Tubes_kpl_kel_4.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI
 {
     public partial class LihatDaftarKelas : Form
     {
-        public LihatDaftarKelas()
+        private User _user;
+
+        public LihatDaftarKelas(User user)
         {
             InitializeComponent();
+            _user = user;
         }
 
         private void LihatDaftarKelas_Load(object sender, EventArgs e)
@@ -45,7 +49,7 @@ namespace GUI
         {
             try
             {
-                menu menuUtama = new menu();
+                menu menuUtama = new menu(_user);
                 menuUtama.Show();
                 this.Hide();
             }

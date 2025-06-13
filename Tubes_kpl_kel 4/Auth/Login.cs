@@ -1,4 +1,5 @@
-﻿using Tubes_kpl_kel_4.Validators;
+﻿using Tubes_kpl_kel_4.Models;
+using Tubes_kpl_kel_4.Validators;
 
 namespace Tubes_kpl_kel_4.Auth
 {
@@ -15,6 +16,8 @@ namespace Tubes_kpl_kel_4.Auth
         public string Nama { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public User Pengguna { get; set; }
 
         public Login()
         {
@@ -39,9 +42,13 @@ namespace Tubes_kpl_kel_4.Auth
 
             if (userDitemukan)
             {
-                Nama = nama;
-                Email = email;
-                Password = password;
+                Pengguna = new User
+                {
+                    Nama = nama,
+                    Email = email,
+                    Password = password
+                };
+
                 Status = StatusLogin.Berhasil;
 
                 return $"Login berhasil.\nNama: {nama}\nEmail: {email}";

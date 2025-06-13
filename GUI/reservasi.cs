@@ -15,6 +15,14 @@ namespace GUI
 {
     public partial class reservasi : Form
     {
+        private User _user;
+
+        public reservasi(User user)
+        {
+            InitializeComponent();
+            _user = user;
+        }
+
         public reservasi()
         {
             InitializeComponent();
@@ -79,13 +87,12 @@ namespace GUI
                 return;
             }
 
-            User user = new User();
             var jadwalList = new List<Jadwal>();
             var reservasiList = new List<DataReservasi>();
             var daftarKelas = new DaftarKelas(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json"));
             var statusReservasi = new StatusReservasi();
 
-            var reservasiRuangan = new ReservasiRuangan<User, Jadwal, DataReservasi>(user, jadwalList, reservasiList, daftarKelas, statusReservasi);
+            var reservasiRuangan = new ReservasiRuangan<User, Jadwal, DataReservasi>(_user, jadwalList, reservasiList, daftarKelas, statusReservasi);
 
             string hasil = reservasiRuangan.LakukanReservasi(temp, ruangan, kapasitas, tanggal, jamMulai, jamSelesai);
 
@@ -108,7 +115,7 @@ namespace GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            menu menuUtama = new menu();
+            menu menuUtama = new menu(_user);
             menuUtama.Show();
             this.Hide();
         }

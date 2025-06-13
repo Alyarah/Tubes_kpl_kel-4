@@ -1,3 +1,5 @@
+using Tubes_kpl_kel_4;
+
 namespace GUI
 {
     public partial class halUtama : Form
@@ -29,6 +31,11 @@ namespace GUI
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void halUtama_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

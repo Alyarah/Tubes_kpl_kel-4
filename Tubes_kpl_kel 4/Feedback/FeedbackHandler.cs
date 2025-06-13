@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tubes_kpl_kel_4.Validators;
 
 namespace Tubes_kpl_kel_4.Feedback
 {
@@ -10,7 +11,13 @@ namespace Tubes_kpl_kel_4.Feedback
         // Menambahkan feedback ke dalam daftar
         public void TambahFeedback(string feedback)
         {
-            feedbacks.Add(feedback);
+            if (!Validasi.ValidasiAlasan(feedback))
+            {
+                Console.WriteLine("Feedback tidak valid. Minimal 5 karakter dan tidak boleh kosong.");
+                return;
+            }
+
+            feedbacks.Add(feedback.Trim());
             Console.WriteLine("Terima kasih atas feedback Anda!");
         }
 

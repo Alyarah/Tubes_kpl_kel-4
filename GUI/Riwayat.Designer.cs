@@ -38,9 +38,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13F);
-            label1.Location = new Point(259, 41);
+            label1.Location = new Point(370, 68);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(150, 25);
+            label1.Size = new Size(216, 36);
             label1.TabIndex = 0;
             label1.Text = "Riwayat Reservasi";
             label1.Click += label1_Click;
@@ -48,18 +49,20 @@
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(94, 161);
+            listBox1.ItemHeight = 25;
+            listBox1.Location = new Point(134, 268);
+            listBox1.Margin = new Padding(4, 5, 4, 5);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(471, 154);
+            listBox1.Size = new Size(671, 254);
             listBox1.TabIndex = 1;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(12, 22);
+            button1.Location = new Point(17, 37);
+            button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(63, 23);
+            button1.Size = new Size(90, 38);
             button1.TabIndex = 2;
             button1.Text = "Back";
             button1.UseVisualStyleBackColor = true;
@@ -69,24 +72,27 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(94, 126);
+            label2.Location = new Point(134, 210);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(172, 20);
+            label2.Size = new Size(247, 30);
             label2.TabIndex = 3;
             label2.Text = "Daftar Riwayat Reservasi";
             label2.Click += label2_Click;
             // 
             // Riwayat
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1143, 750);
             Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(listBox1);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Riwayat";
             Text = "Riwayat";
+            Load += Riwayat_Load;
             ResumeLayout(false);
             PerformLayout();
         }

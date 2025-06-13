@@ -48,10 +48,10 @@
             button_back.UseVisualStyleBackColor = true;
             button_back.Click += button_back_Click;
             // 
-            // button_login
+            // button_regis
             // 
             button_regis.Location = new Point(337, 374);
-            button_regis.Name = "button_login";
+            button_regis.Name = "button_regis";
             button_regis.Size = new Size(181, 44);
             button_regis.TabIndex = 14;
             button_regis.Text = "Daftar";
@@ -127,6 +127,7 @@
             Controls.Add(textBox_email);
             Name = "regis";
             Text = "regis";
+            Load += regis_Load_1;
             ResumeLayout(false);
             PerformLayout();
         }

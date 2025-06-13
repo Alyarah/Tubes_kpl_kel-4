@@ -183,6 +183,7 @@
             Controls.Add(textBox1);
             Name = "batalkan";
             Text = "batalkan";
+            Load += batalkan_Load;
             ResumeLayout(false);
             PerformLayout();
         }

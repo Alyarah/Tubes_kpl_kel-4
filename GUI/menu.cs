@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tubes_kpl_kel_4.Auth;
 using Tubes_kpl_kel_4.Models;
+using Tubes_kpl_kel_4.Reservasi;
 
 namespace GUI
 {
     public partial class menu : Form
     {
-        public menu()
+        private User _user;
+
+        public menu(User user)
         {
             InitializeComponent();
+            _user = user;
         }
 
         private void button_logout_Click(object sender, EventArgs e)
@@ -33,7 +37,7 @@ namespace GUI
 
         private void button_feedback_Click(object sender, EventArgs e)
         {
-            feedback feedbackForm = new feedback();
+            feedback feedbackForm = new feedback(_user);
             feedbackForm.Show();
             this.Hide();
         }
@@ -42,7 +46,7 @@ namespace GUI
         {
             try
             {
-                var daftarKelasForm = new LihatDaftarKelas();
+                var daftarKelasForm = new LihatDaftarKelas(_user);
                 daftarKelasForm.Show();
                 this.Hide();
             }
@@ -54,28 +58,29 @@ namespace GUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            reservasi reservasiForm = new reservasi();
+            reservasi reservasiForm = new reservasi(_user);
             reservasiForm.Show();
             this.Hide();
         }
 
         private void button_batalkan_Click(object sender, EventArgs e)
         {
-            batalkan batalkanForm = new batalkan();
-            batalkanForm.Show();
+            var dataReservasi = new StatusReservasi().DaftarReservasi;
+            batalkan formPembatalan = new batalkan(_user, dataReservasi);
+            formPembatalan.Show();
             this.Hide();
         }
 
         private void button_status_Click(object sender, EventArgs e)
         {
-            status statusForm = new status();
+            status statusForm = new status(_user);
             statusForm.Show();
             this.Hide();
         }
 
         private void button_reservasi_Click(object sender, EventArgs e)
         {
-            Riwayat riwayat = new Riwayat();
+            Riwayat riwayat = new Riwayat(_user);
             riwayat.Show();
             this.Hide();
         }

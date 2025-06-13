@@ -84,5 +84,10 @@ namespace GUI
         {
 
         }
+
+        private void regis_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
