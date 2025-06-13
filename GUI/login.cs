@@ -64,7 +64,7 @@ namespace GUI
 
             if (hasilLogin.StartsWith("Login berhasil"))
             {
-                User userLogin = loginAuth.Pengguna;
+                User userLogin = UserStorage.AmbilUserByEmail(email);
 
                 menu menuUtama = new menu(userLogin);
                 menuUtama.Show();

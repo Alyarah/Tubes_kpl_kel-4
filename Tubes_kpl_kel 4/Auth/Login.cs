@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Tubes_kpl_kel_4.Validators;
+using Tubes_kpl_kel_4.Models;
 
 namespace Tubes_kpl_kel_4.Auth
 {
@@ -16,6 +17,8 @@ namespace Tubes_kpl_kel_4.Auth
         public StatusLogin Status { get; private set; }
         public string Nama { get; private set; }
         public string Email { get; private set; }
+
+        public User Pengguna;
 
         public Login()
         {
