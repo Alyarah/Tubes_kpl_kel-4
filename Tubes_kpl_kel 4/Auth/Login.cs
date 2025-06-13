@@ -1,4 +1,5 @@
-﻿using Tubes_kpl_kel_4.Models;
+﻿using System.Security.Cryptography;
+using System.Text;
 using Tubes_kpl_kel_4.Validators;
 
 namespace Tubes_kpl_kel_4.Auth
@@ -12,12 +13,9 @@ namespace Tubes_kpl_kel_4.Auth
 
     public class Login
     {
-        public StatusLogin Status { get; set; }
-        public string Nama { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-
-        public User Pengguna { get; set; }
+        public StatusLogin Status { get; private set; }
+        public string Nama { get; private set; }
+        public string Email { get; private set; }
 
         public Login()
         {
@@ -37,26 +35,37 @@ namespace Tubes_kpl_kel_4.Auth
                 return "Login gagal. Inputan tidak valid.";
             }
 
-            // Cek apakah user ditemukan
-            bool userDitemukan = UserStorage.CariUser(nama, email, password);
+            // Hash password
+            string hashedPassword = HashPassword(password);
+
+            // Cek user hanya berdasarkan email dan hashed password
+            bool userDitemukan = UserStorage.CariUserDenganHash(email, hashedPassword);
 
             if (userDitemukan)
             {
-                Pengguna = new User
-                {
-                    Nama = nama,
-                    Email = email,
-                    Password = password
-                };
-
+                Nama = nama;
+                Email = email;
                 Status = StatusLogin.Berhasil;
-
                 return $"Login berhasil.\nNama: {nama}\nEmail: {email}";
             }
             else
             {
                 Status = StatusLogin.Gagal;
                 return "Login gagal. Data tidak ditemukan atau salah.";
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
     }

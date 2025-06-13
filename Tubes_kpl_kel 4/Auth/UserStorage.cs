@@ -8,22 +8,28 @@ namespace Tubes_kpl_kel_4.Auth
     {
         private static List<User> daftarUser = new List<User>();
 
-        // Menambahkan user baru ke dalam daftar
+        // Tambahkan user baru
         public static void TambahUser(User user)
         {
             daftarUser.Add(user);
         }
 
-        // Mengecek apakah user dengan nama dan email tertentu sudah terdaftar
-        public static bool CekUserSudahAda(string nama, string email)
+        // Cek apakah user sudah ada berdasarkan email saja
+        public static bool CekUserSudahAda(string email)
         {
-            return daftarUser.Any(u => u.Nama == nama && u.Email == email);
+            return daftarUser.Any(u => u.Email == email);
         }
 
-        // Mencari user berdasarkan nama, email, dan password
-        public static bool CariUser(string nama, string email, string password)
+        // Cek login berdasarkan email dan password (sudah di-hash)
+        public static bool CariUserDenganHash(string email, string hashedPassword)
         {
-            return daftarUser.Any(u => u.Nama == nama && u.Email == email && u.Password == password);
+            return daftarUser.Any(u => u.Email == email && u.Password == hashedPassword);
+        }
+
+        // (Opsional) Ambil data user berdasarkan email
+        public static User AmbilUserByEmail(string email)
+        {
+            return daftarUser.FirstOrDefault(u => u.Email == email);
         }
     }
 }

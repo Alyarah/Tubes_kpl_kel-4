@@ -1,4 +1,6 @@
-﻿using Tubes_kpl_kel_4.Models;
+﻿using System.Security.Cryptography;
+using System.Text;
+using Tubes_kpl_kel_4.Models;
 using Tubes_kpl_kel_4.Validators;
 
 namespace Tubes_kpl_kel_4.Auth
@@ -22,22 +24,38 @@ namespace Tubes_kpl_kel_4.Auth
             }
 
             // Cek apakah user sudah terdaftar
-            if (UserStorage.CekUserSudahAda(Nama, Email))
+            if (UserStorage.CekUserSudahAda(Email))
             {
-                return "Registrasi gagal. User dengan nama dan email ini sudah terdaftar.";
+                return "Registrasi gagal. User dengan email ini sudah terdaftar.";
             }
 
-            // Tambah user baru
+            // Hash password sebelum disimpan
+            string hashedPassword = HashPassword(Password);
+
             var user = new TUser
             {
                 Nama = Nama,
                 Email = Email,
-                Password = Password
+                Password = hashedPassword
             };
 
             UserStorage.TambahUser(user);
 
             return $"Registrasi berhasil untuk: {Nama}";
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }
