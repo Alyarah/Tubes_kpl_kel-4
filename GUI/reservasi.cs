@@ -23,50 +23,47 @@ namespace GUI
             _user = user;
         }
 
-        public reservasi()
-        {
-            InitializeComponent();
-        }
-
         private void label_tempat_Click(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
 
         private void textBox_mulai_TextChanged(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
 
         private void label_selesai_Click(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
 
         private void textBox_selesai_TextChanged(object sender, EventArgs e)
         {
-
+            //Tidak digunakan
         }
 
         private void label_jam_Click(object sender, EventArgs e)
         {
-
+            //Tidak digunakan
         }
 
         private void reservasi_Load(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
 
+        // Terdapat validasi untuk input
         private void button_submit_Click(object sender, EventArgs e)
         {
             string temp = tempat.Text.Trim();
             string ruangan = textBox_ruangan.Text.Trim();
             string kapasitasStr = textBox_kapasitas.Text.Trim();
-            string tanggal = textBoxt_tanggal.Text.Trim(); // format: yyyy-MM-dd
+            string tanggal = textBox_tanggal.Text.Trim(); // format: yyyy-MM-dd
             string jamMulai = textBox_mulai.Text.Trim();  // format: HH:mm
             string jamSelesai = textBox_selesai.Text.Trim(); // format: HH:mm
 
+            //validasi inputan
             if (string.IsNullOrWhiteSpace(temp) || string.IsNullOrWhiteSpace(ruangan) ||
                 string.IsNullOrWhiteSpace(kapasitasStr) || string.IsNullOrWhiteSpace(tanggal) ||
                 string.IsNullOrWhiteSpace(jamMulai) || string.IsNullOrWhiteSpace(jamSelesai))
@@ -102,7 +99,7 @@ namespace GUI
             tempat.Clear();
             textBox_ruangan.Clear();
             textBox_kapasitas.Clear();
-            textBoxt_tanggal.Clear();
+            textBox_tanggal.Clear();
             textBox_mulai.Clear();
             textBox_selesai.Clear();
 
@@ -110,7 +107,7 @@ namespace GUI
 
         private void tempat_TextChanged(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -122,7 +119,7 @@ namespace GUI
 
         private void textBoxt_tanggal_TextChanged(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
     }
 }

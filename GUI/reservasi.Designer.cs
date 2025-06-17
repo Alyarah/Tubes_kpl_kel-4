@@ -33,7 +33,7 @@
             tempat = new TextBox();
             textBox_ruangan = new TextBox();
             label_ruangan = new Label();
-            textBoxt_tanggal = new TextBox();
+            textBox_tanggal = new TextBox();
             label_tanggal = new Label();
             textBox_mulai = new TextBox();
             label_jam = new Label();
@@ -97,12 +97,12 @@
             // 
             // textBoxt_tanggal
             // 
-            textBoxt_tanggal.Location = new Point(75, 370);
-            textBoxt_tanggal.Margin = new Padding(4, 4, 4, 4);
-            textBoxt_tanggal.Name = "textBoxt_tanggal";
-            textBoxt_tanggal.Size = new Size(878, 31);
-            textBoxt_tanggal.TabIndex = 6;
-            textBoxt_tanggal.TextChanged += textBoxt_tanggal_TextChanged;
+            textBox_tanggal.Location = new Point(75, 370);
+            textBox_tanggal.Margin = new Padding(4, 4, 4, 4);
+            textBox_tanggal.Name = "textBoxt_tanggal";
+            textBox_tanggal.Size = new Size(878, 31);
+            textBox_tanggal.TabIndex = 6;
+            textBox_tanggal.TextChanged += textBoxt_tanggal_TextChanged;
             // 
             // label_tanggal
             // 
@@ -217,7 +217,7 @@
             Controls.Add(label_selesai);
             Controls.Add(textBox_mulai);
             Controls.Add(label_jam);
-            Controls.Add(textBoxt_tanggal);
+            Controls.Add(textBox_tanggal);
             Controls.Add(label_tanggal);
             Controls.Add(textBox_ruangan);
             Controls.Add(label_ruangan);
@@ -239,7 +239,7 @@
         private TextBox tempat;
         private TextBox textBox_ruangan;
         private Label label_ruangan;
-        private TextBox textBoxt_tanggal;
+        private TextBox textBox_tanggal;
         private Label label_tanggal;
         private TextBox textBox_mulai;
         private Label label_jam;

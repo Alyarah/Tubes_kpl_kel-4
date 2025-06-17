@@ -24,11 +24,13 @@ namespace GUI
             _user = user;
         }
 
+        // Menampilkan dan mengecek file daftar kelas
         private void LihatDaftarKelas_Load(object sender, EventArgs e)
         {
             //Mengakses lokasi json dan inisialisasi
             string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kelas", "ListKelas.json");
             
+            // Cek apakah file daftar kelas ditemukan
             if (!File.Exists(configPath))
             {
                 MessageBox.Show("File daftar kelas tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -56,7 +58,7 @@ namespace GUI
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            // Tidak digunakan
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -75,12 +77,12 @@ namespace GUI
 
         private void label2_Click(object sender, EventArgs e)
         {
-
+            //Tidak digunakan
         }
 
         private void listBoxDaftarKelas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            // Tidak digunakan
         }
     }
 }
