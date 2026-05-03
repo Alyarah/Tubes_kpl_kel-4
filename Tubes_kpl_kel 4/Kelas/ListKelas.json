@@ -1,0 +1,119 @@
+﻿{
+  "Jadwal": [
+    {
+      "Tempat": "Gedung A",
+      "Ruangan": "R.01",
+      "Kapasitas": 40,
+      "Hari": "Senin",
+      "Mulai": "10:30",
+      "Selesai": "12:30"
+    },
+    {
+      "Tempat": "Gedung A",
+      "Ruangan": "R.02",
+      "Kapasitas": 40,
+      "Hari": "Kamis",
+      "Mulai": "08:30",
+      "Selesai": "10:30"
+    },
+    {
+      "Tempat": "Gedung A",
+      "Ruangan": "R.01",
+      "Kapasitas": 40,
+      "Hari": "Senin",
+      "Mulai": "13:30",
+      "Selesai": "16:30"
+    },
+    {
+      "Tempat": "Gedung B",
+      "Ruangan": "R.01",
+      "Kapasitas": 35,
+      "Hari": "Rabu",
+      "Mulai": "10:30",
+      "Selesai": "12:30"
+    },
+    {
+      "Tempat": "Gedung B",
+      "Ruangan": "R.03",
+      "Kapasitas": 35,
+      "Hari": "Kamis",
+      "Mulai": "10:30",
+      "Selesai": "12:30"
+    },
+    {
+      "Tempat": "Lab",
+      "Ruangan": "01",
+      "Kapasitas": 40,
+      "Hari": "Sabtu",
+      "Mulai": "10:30",
+      "Selesai": "13:30"
+    }
+  ],
+  "Reservasi": [
+    {
+      "Jadwal Reservasi": {
+        "NamaUser": "Alya",
+        "Tanggal": "2025-04-01",
+        "Mulai": "08:00",
+        "Selesai": "10:30"
+      },
+      "Tempat": "Gedung A",
+      "Ruangan": "R.01",
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan" : ""
+    },
+    {
+      "Jadwal Reservasi": {
+        "NamaUser": "Rahma",
+        "Tanggal": "2025-04-02",
+        "Mulai": "08:00",
+        "Selesai": "10:30"
+      },
+      "Tempat": "Gedung A",
+      "Ruangan": "R.03",
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan": ""
+    },
+    {
+      "Jadwal Reservasi": {
+        "NamaUser": "Sheila",
+        "Tanggal": "2025-04-01",
+        "Mulai": "08:00",
+        "Selesai": "10:30"
+      },
+      "Tempat": "Gedung A",
+      "Ruangan": "R.05",
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan": ""
+    },
+    {
+      "Jadwal Reservasi": {
+        "NamaUser": "Nabilla",
+        "Tanggal": "2025-04-03",
+        "Mulai": "13:30",
+        "Selesai": "16:30"
+      },
+      "Tempat": "Gedung A",
+      "Ruangan": "R.01",
+      "Kapasitas": 40,
+      "Status": "Dibatalkan",
+      "AlasanPembatalan": "Ingin mengubah jadwal"
+    },
+    {
+      "Jadwal Reservasi": {
+        "NamaUser": "Chantika",
+        "Tanggal": "2025-04-11",
+        "Mulai": "09:00",
+        "Selesai": "12:00"
+      },
+      "Tempat": "Gedung B",
+      "Ruangan": "R.01",
+      "Kapasitas": 40,
+      "Status": "Aktif",
+      "AlasanPembatalan": ""
+    }
+  ]
+}
